@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>叶杏涛 - 作品集</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0f0f0f;
+            color: #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            position: relative;
+        }
+
+        /* 背景装饰 */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            top: -10%;
+            right: -5%;
+            background: #d97757;
+        }
+
+        .bg-glow-2 {
+            bottom: -10%;
+            left: -5%;
+            background: #2a6ee6;
+        }
+
+        /* 内容区 */
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 头部 */
+        .header {
+            margin-bottom: 48px;
+        }
+
+        .name {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 8px;
+            margin-bottom: 12px;
+        }
+
+        .role {
+            font-size: 18px;
+            color: #888;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.04);
+            color: #aaa;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            border-color: rgba(217, 119, 87, 0.4);
+            color: #d97757;
+            background: rgba(217, 119, 87, 0.08);
+        }
+
+        /* 分隔线 */
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d97757, transparent);
+            margin: 0 auto 48px;
+        }
+
+        /* 项目卡片网格 */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        .project-card {
+            position: relative;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d97757, #e8a88a);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(217, 119, 87, 0.3);
+            background: rgba(255,255,255,0.06);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 60px rgba(217, 119, 87, 0.1);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin: 0 auto 16px;
+            background: rgba(217, 119, 87, 0.1);
+            border: 1px solid rgba(217, 119, 87, 0.2);
+        }
+
+        .project-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .project-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .project-badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 500;
+            background: rgba(42, 110, 230, 0.1);
+            color: #6a9bcc;
+            border: 1px solid rgba(42, 110, 230, 0.15);
+        }
+
+        /* 底部 */
+        .footer {
+            margin-top: 48px;
+            color: #444;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .projects {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .name {
+                font-size: 36px;
+                letter-spacing: 4px;
+            }
+            .projects {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            .page {
+                padding: 24px 16px;
+                justify-content: flex-start;
+                overflow-y: auto;
+            }
+            html, body {
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <div class="page">
+        <div class="content">
+            <div class="header">
+                <h1 class="name">叶杏涛</h1>
+                <p class="role">IT BA / 产品方向 · 1年多企业级项目经验</p>
+                <div class="tags">
+                    <span class="tag">需求分析</span>
+                    <span class="tag">流程设计</span>
+                    <span class="tag">原型设计</span>
+                    <span class="tag">技术文档</span>
+                    <span class="tag">UAT测试</span>
+                    <span class="tag">上线迭代</span>
+                    <span class="tag">粤语流利</span>
+                    <span class="tag">CET-6</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="projects">
+                <a href="./bupa/index.html" class="project-card">
+                    <div class="project-icon">💼</div>
+                    <div class="project-title">奔步 × BUPA</div>
+                    <div class="project-desc">企业级保险核心业务系统重构，投保指令自动化、Sales Lead全生命周期管理</div>
+                    <span class="project-badge">企业交付</span>
+                </a>
+
+                <a href="./habit/index.html" class="project-card">
+                    <div class="project-icon">🎯</div>
+                    <div class="project-title">渐成画迹</div>
+                    <div class="project-desc">微习惯追踪App，从0到1独立产品，拼豆像素画渐进激励系统</div>
+                    <span class="project-badge">独立产品</span>
+                </a>
+
+                <a href="./painting/index.html" class="project-card">
+                    <div class="project-icon">🎨</div>
+                    <div class="project-title">字里藏画</div>
+                    <div class="project-desc">AI图像生成工具，文生图+同款复刻+重塑画面，3天MVP上线</div>
+                    <span class="project-badge">AI工具</span>
+                </a>
+
+                <a href="./embroidery/index.html" class="project-card">
+                    <div class="project-icon">🧵</div>
+                    <div class="project-title">AI刺绣定制</div>
+                    <div class="project-desc">4-Agent串联架构，非遗刺绣定制平台，需求解析→图案生成→匠人匹配</div>
+                    <span class="project-badge">架构设计</span>
+                </a>
+
+                <a href="./aimodel/index.html" class="project-card">
+                    <div class="project-icon">📊</div>
+                    <div class="project-title">AI模型日报</div>
+                    <div class="project-desc">每日追踪全球AI大模型动态，五维评估框架，场景化选型推荐</div>
+                    <span class="project-badge">数据产品</span>
+                </a>
+            </div>
+
+            <div class="footer">
+                作品集 · Portfolio
+            </div>
+        </div>
+    </div>
+</body>
+</html>

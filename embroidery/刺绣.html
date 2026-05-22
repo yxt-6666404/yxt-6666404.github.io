@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI刺绣定制平台 Agent-Flow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f5f6f7;
+            color: #333;
+            line-height: 1.8;
+            padding: 16px
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06)
+        }
+
+        /* 顶部 */
+        .header {
+            margin-bottom: 28px
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 8px
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 16px
+        }
+
+        /* 板块 */
+        .section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #f0f0f0
+        }
+
+        .section h2 {
+            font-size: 20px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .section h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #d97757;
+            border-radius: 2px
+        }
+
+        .section p {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 12px;
+            line-height: 1.8
+        }
+
+        /* 数据卡片 */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 16px 0
+        }
+
+        .data-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center
+        }
+
+        .data-num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #d97757
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px
+        }
+
+        /* 图片卡片 */
+        .img-card {
+            background: #fafbfc;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+            border: 1px solid #ececec;
+            text-align: center
+        }
+
+        .img-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0
+        }
+
+        .img-caption {
+            color: #888;
+            font-size: 13px;
+            margin-top: 10px;
+            font-style: italic
+        }
+
+        /* 视频区域 */
+        .video-box {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0
+        }
+
+        .video-box video {
+            width: 100%;
+            display: block;
+            border-radius: 12px
+        }
+
+        .video-info {
+            text-align: center;
+            margin-top: 12px
+        }
+
+        .video-info .video-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 6px
+        }
+
+        .video-info .video-desc {
+            font-size: 13px;
+            color: #999
+        }
+
+        /* 标签 */
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            margin: 0 6px 8px 0;
+            font-weight: 500
+        }
+
+        /* 迭代时间线 */
+        .timeline {
+            margin: 16px 0;
+            padding-left: 20px;
+            border-left: 2px solid #e0e0e0
+        }
+
+        .timeline-item {
+            margin-bottom: 16px;
+            position: relative
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            background: #d97757;
+            border-radius: 50%
+        }
+
+        .timeline-item .version {
+            font-weight: 700;
+            color: #1a1a1a
+        }
+
+        .timeline-item .desc {
+            color: #555;
+            font-size: 14px
+        }
+
+        .timeline-item .metric {
+            color: #d97757;
+            font-size: 13px;
+            font-weight: 600
+        }
+
+        /* 测试表格 */
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px
+        }
+
+        .test-table th {
+            background: #f8f9fa;
+            padding: 10px;
+            text-align: left;
+            color: #666;
+            font-weight: 600
+        }
+
+        .test-table td {
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555
+        }
+
+        .test-table .pass {
+            color: #2e7d32;
+            font-weight: 600
+        }
+
+        .test-table .fail {
+            color: #c62828;
+            font-weight: 600
+        }
+
+        .footer {
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 13px;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 返回首页 -->
+        <div style="margin-bottom: 8px;">
+            <a href="../index.html" style="color: #d97757; text-decoration: none; font-size: 14px; font-weight: 500;">← 返回首页</a>
+        </div>
+        <!-- 顶部 -->
+        <div class="header">
+            <span class="badge">架构设计项目</span>
+            <h1>AI刺绣定制平台 Agent-Flow</h1>
+            <p class="subtitle">4-Agent串联架构 · 职责边界与接口契约 · MVP落地验证</p>
+            <div style="margin-top:12px">
+                <span class="tag">Prompt工程</span>
+                <span class="tag">RAG检索</span>
+                <span class="tag">Coze低代码</span>
+                <span class="tag">规则引擎</span>
+            </div>
+        </div>
+
+        <!-- 1. 项目背景 -->
+        <div class="section">
+            <h2>项目背景与核心痛点</h2>
+            <p>刺绣作为国家级非物质文化遗产，面临<strong>"传承难"与"消费难"</strong>双重困境。与标准化工业品不同，刺绣定制具有<strong>强非标、重沟通、长周期</strong>特性——一件定制作品从需求提出到最终交付，往往要经过多轮反复确认，平均沟通成本高。
+            </p>
+            <p>核心痛点：</p>
+            <p>• <strong>语义鸿沟</strong>：用户用"温柔一点""要有高级感"等感性词汇描述需求，匠人需要的是可执行的技术参数（针法、丝线规格、Pantone色号）<<br>
+                    • <strong>视觉失明</strong>：用户仅凭文字描述下单，匠人凭经验想象制作，交付时"货不对板"纠纷频发<br>
+                    • <strong>低效匹配</strong>：匠人专业能力分层（有的擅长苏绣花鸟，有的擅长粤绣猛兽）和档期差异，导致用户找不到"对的人"</p>
+
+            <!-- 截图1：PRD行业痛点部分 -->
+            <div class="img-card">
+                <img src="./agent1.png" alt="行业痛点分析">
+                <p class="img-caption">行业痛点分析</p>
+            </div>
+        </div>
+
+        <!-- 2. 核心架构 -->
+        <div class="section">
+            <h2>核心架构：4-Agent串联设计</h2>
+            <p>独立设计4-Agent串联架构，每个Agent有明确职责边界、输入输出契约和异常兜底策略：</p>
+
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-num">A1</div>
+                    <div class="data-label">需求解析<br>Prompt+RAG</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">A2</div>
+                    <div class="data-label">图案生成<br>纯Prompt</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">A3</div>
+                    <div class="data-label">匠人匹配<br>RAG+Prompt</div>
+                </div>
+            </div>
+
+            <p><strong>Agent 1 需求解析</strong>：自然语言→结构化数据。7维度完整度评分（0-7分），≤4轮澄清对话，输出6模块文字方案+JSON<br>
+                <strong>Agent 2 图案生成</strong>：结构化数据→3张视觉方案。基于Seedream生成参考图，含3层降级策略<br>
+                <strong>Agent 3 匠人匹配</strong>：需求参数→Top 3匠人。五维度评分（流派30%/复杂度30%/预算20%/档期10%/历史10%）<<br>
+                    <strong>Flow 进度监控</strong>：规则引擎驱动。R1-R6规则（每日播报/延期预警/工序确认/deadline临近/长期停滞/交付完成）
+            </p>
+            <div class="img-card">
+                <img src="./agent7.png" alt="用户旅程图">
+                <p class="img-caption">用户旅程图</p>
+            </div>
+            <!-- 截图2：系统架构图 -->
+            <div class="img-card">
+                <img src="./agent2.png" alt="4-Agent系统架构图">
+                <p class="img-caption">4-Agent分层系统架构图</p>
+            </div>
+            <div class="img-card">
+                <img src="./agent8.png" alt="4-Agent系统架构图">
+                <p class="img-caption">职责边界表格</p>
+            </div>
+
+            <!-- 截图3：全局工作流程图 -->
+            <div class="img-card">
+                <a href="./embroidery_agent_flow.html" target="_blank">
+                    全局工作流程图
+                </a>
+            </div>
+        </div>
+
+        <!-- 3. Agent 1 迭代故事 -->
+        <div class="section">
+            <h2>Agent 1 需求解析：V1→V5迭代与验证</h2>
+            <p>Agent
+                1是整个系统的<strong>核心差异化</strong>，承担"需求标准化"职责。采用<strong>Prompt+RAG混合架构</strong>：Prompt负责逻辑推理，知识库存放6大规则表。</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="version">V1 → V2 架构解耦</div>
+                    <div class="desc">将内嵌在Prompt中的6大规则表迁移到Coze知识库，Prompt改为引用模式</div>
+                    <div class="metric">Token消耗降低60%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="version">V2 → V3 预算优先原则</div>
+                    <div class="desc">确立推导优先级（预算P0→工期P1→图案P2），建立预算-复杂度-工期三角校验表</div>
+                    <div class="metric">预算推导准确率提升至90%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="version">V3 → V4 记忆机制</div>
+                    <div class="desc">新增显式【当前信息状态】块，强制每轮回顾历史，单次生成原则</div>
+                    <div class="metric">Token从7000降至4000，记忆保持率100%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="version">V4 → V5 冲突预检</div>
+                    <div class="desc">增加Step 2.5对象-图案禁忌强制检测（如送母亲+猛虎）</div>
+                    <div class="metric">C3阻断级缺陷修复，综合通过率85%</div>
+                </div>
+            </div>
+
+            <!-- 截图4：迭代决策线 -->
+            <div class="img-card">
+                <img src="./agent4.jpeg" alt="V1-V5迭代决策线">
+                <p class="img-caption">Agent 1迭代决策线V1→V5</p>
+            </div>
+        </div>
+
+        <!-- 4. 测试验证 -->
+        <div class="section">
+            <h2>测试验证：6维度加权评分体系</h2>
+            <p>建立6维度加权评分法（语义翻译20%/边界拦截20%/约束冲突20%/澄清策略20%/社交语境10%/基础功能10%），16项测试用例覆盖6大场景类型。</p>
+
+            <div class="data-grid" style="grid-template-columns:repeat(2,1fr)">
+                <div class="data-item">
+                    <div class="data-num">85%</div>
+                    <div class="data-label">综合通过率（14/16项）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">4.3/5</div>
+                    <div class="data-label">平均分</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">5/5</div>
+                    <div class="data-label">边界拦截能力</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">5/5</div>
+                    <div class="data-label">记忆保持能力</div>
+                </div>
+            </div>
+
+            <table class="test-table">
+                <tr>
+                    <th>级别</th>
+                    <th>问题</th>
+                    <th>修复方案</th>
+                    <th>结果</th>
+                </tr>
+                <tr>
+                    <td class="fail">🔴 阻断级</td>
+                    <td>C3：送母亲+猛虎未识别</td>
+                    <td>增加Step 2.5冲突预检</td>
+                    <td class="pass">修复后5/5</td>
+                </tr>
+                <tr>
+                    <td class="fail">🟡 逻辑级</td>
+                    <td>A2："仙"映射错误</td>
+                    <td>知识库添加氛围词映射</td>
+                    <td>V6优化</td>
+                </tr>
+                <tr>
+                    <td class="fail">🟡 逻辑级</td>
+                    <td>C2：选项不完整</td>
+                    <td>强制三选项结构</td>
+                    <td>V6优化</td>
+                </tr>
+            </table>
+
+            <!-- 截图5：测试报告问题分级 -->
+            <div class="img-card">
+                <img src="./agent5.png" alt="测试报告问题分级">
+                <img src="./agent6.jpeg" alt="测试报告问题分级">
+                <p class="img-caption">Agent 1测试报告V2.0（部分内容）</p>
+            </div>
+        </div>
+
+        <!-- 5. MVP落地 -->
+        <div class="section">
+            <h2>MVP落地：Coze平台5天搭建</h2>
+            <p>基于"能跑通的Demo > 完美的架构"原则，在Coze平台完成MVP落地：</p>
+            <p>• <strong>保留</strong>：Agent 1核心差异化、Agent 2视觉生成、简单匠人匹配、5页面应用<br>
+                • <strong>裁剪</strong>：Flow规则引擎改为静态演示、多轮修改简化为1次、完整RAG改为硬编码规则<br>
+                • <strong>妥协</strong>：固定4轮澄清、history字段显式传递、布尔变量模拟状态机</p>
+
+            <div class="data-grid" style="grid-template-columns:repeat(5,1fr)">
+                <div class="data-item">
+                    <div class="data-num">5</div>
+                    <div class="data-label">页面</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">4</div>
+                    <div class="data-label">工作流</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">3</div>
+                    <div class="data-label">Agent</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">5</div>
+                    <div class="data-label">匠人数据</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">5</div>
+                    <div class="data-label">天搭建</div>
+                </div>
+            </div>
+
+            <div class="video-box">
+                <video controls autoplay muted loop playsinline>
+                    <source src="./4b42cf3cbb05a44555013b52458b26e7_raw.mp4" type="video/mp4">
+                    您的浏览器不支持视频播放
+                </video>
+            </div>
+            <div class="video-info">
+                <div class="video-title">完整用户旅程演示</div>
+                <div class="video-desc">用户输入 → 澄清对话 → 方案生成 → 图案选择 → 匠人匹配 → 进度追踪 （对话页→方案页→匠人页→进度页）</div>
+            </div>
+        </div>
+
+        <!-- 6. 技术选型 -->
+        <div class="section">
+            <h2>技术选型：为什么这样设计</h2>
+            <p>每个Agent的技术方案不是拍脑袋，而是基于任务特性的理性选择：</p>
+
+            <table class="test-table">
+                <tr>
+                    <th>Agent</th>
+                    <th>任务特性</th>
+                    <th>最终选择</th>
+                    <th>关键决策理由</th>
+                </tr>
+                <tr>
+                    <td>Agent 1</td>
+                    <td>逻辑推理+规则推导</td>
+                    <td>Prompt+RAG混合</td>
+                    <td>纯Prompt Token超限；纯RAG无法处理澄清策略</td>
+                </tr>
+                <tr>
+                    <td>Agent 2</td>
+                    <td>创意生成+视觉输出</td>
+                    <td>纯Prompt</td>
+                    <td>RAG限制创意发散；用户需要3张构图变体</td>
+                </tr>
+                <tr>
+                    <td>Agent 3</td>
+                    <td>知识检索+精准匹配</td>
+                    <td>RAG+Prompt混合</td>
+                    <td>匠人数据动态变化；五维度排序需Prompt推理</td>
+                </tr>
+                <tr>
+                    <td>Flow</td>
+                    <td>确定性状态流转</td>
+                    <td>规则引擎</td>
+                    <td>进度计算是确定性问题；规则引擎无Token消耗</td>
+                </tr>
+            </table>
+
+            <!-- 截图7：技术选型对比矩阵 -->
+            <div class="img-card">
+                <img src="./agent9.jpeg" alt="技术选型对比矩阵">
+                <p class="img-caption">Prompt/RAG/微调三维度对比 + 4个Agent选型理由</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            项目周期：2026.03-2026.05 · 独立架构设计与落地 · Coze + 豆包模型
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刺绣定制Agent流程图</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header .badge {
+            background: #e94560;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .controls {
+            display: flex;
+            gap: 12px;
+        }
+        .btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .diagram-wrapper {
+            padding: 32px;
+            overflow: auto;
+            min-height: 600px;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        .legend {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            font-size: 13px;
+        }
+        .legend-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 6px 0;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 2px solid;
+        }
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            .legend {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+                刺绣定制Agent流程图
+            </h1>
+            <div class="badge">4-Agent架构</div>
+            <div class="controls">
+                <button class="btn" onclick="zoomIn()">放大</button>
+                <button class="btn" onclick="zoomOut()">缩小</button>
+                <button class="btn" onclick="resetZoom()">重置</button>
+            </div>
+        </div>
+        <div class="diagram-wrapper">
+            <div class="loading" id="loading">正在渲染流程图...</div>
+            <div class="mermaid" id="diagram">
+flowchart TB
+    %% ===== 样式定义 =====
+    classDef startEnd fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef user fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef agent1 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef agent2 fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
+    classDef agent3 fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef flow fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef manual fill:#ffebee,stroke:#c62828,stroke-width:3px,color:#c62828
+    classDef decision fill:#fff3e0,stroke:#e65100,stroke-width:2px,shape:stadium
+    classDef fallback fill:#eceff1,stroke:#455a64,stroke-width:2px,stroke-dasharray: 5 5
+    classDef selection fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+
+    %% ===== 主流程起点 =====
+    Start([用户输入需求]):::startEnd --> A1[Agent 1<br/>需求解析+生成<br/>技术方案<br/>输出:6模块+JSON]:::agent1
+    
+    %% ===== Agent 1 异常分支点 =====
+    A1 --> Check{检查<br/>nextAgent字段}:::decision
+    
+    %% 分支1：技术不可能/高风险冲突（用户坚持）
+    Check -->|nextAgent=<br/>'manual'<br/>reason='high_<br/>risk_conflict'| Manual1[人工客服介入<br/>评估/驳回/特批]:::manual
+    Manual1 -->|特批通过| A1_Resume[重新生成方案<br/>标记高风险]:::agent1
+    Manual1 -->|驳回| End1([结束会话<br/>reason='rejected']):::startEnd
+    
+    %% 分支2：正常流转 → 等待用户确认技术方案
+    Check -->|nextAgent=<br/>'agent2'| Pending[状态:pending<br/>等待确认技术方案<br/>confirmationDeadline=<br/>24h]:::decision
+    
+    %% 统一入口
+    A1_Resume --> Pending
+    
+    %% ===== Agent 1阶段超时处理 =====
+    Pending -->|24h超时<br/>confirmationStatus=<br/>'expired'| Flow_A1_Timeout[Flow发送提醒<br/>标记sessionClosed]:::flow
+    Flow_A1_Timeout --> End3([会话关闭]):::startEnd
+    
+    %% ===== 用户操作分支（Agent 1后） =====
+    Pending --> UserAction{用户操作?}:::user
+    
+    %% 2.1 放弃
+    UserAction -->|放弃<br/>confirmationStatus=<br/>'abandoned'| End1
+    
+    %% 2.2 修改 → Agent 1局部澄清
+    UserAction -->|修改<br/>confirmationStatus=<br/>'modifying'| A1_Modify[Agent 1<br/>局部澄清<br/>保留未改字段<br/>modificationCount+1]:::agent1
+    A1_Modify --> ModCheck{Agent 1<br/>修改次数?}:::decision
+    ModCheck -->|<3次| Pending
+    ModCheck -->|≥3次| Manual_A1[转人工<br/>防止无限循环<br/>reason='excessive_<br/>modification']:::manual
+    Manual_A1 -->|人工整理需求| A2
+    
+    %% 2.3 确认 → 进入Agent 2（视觉生成）
+    UserAction -->|确认<br/>confirmationStatus=<br/>'confirmed'| A2[Agent 2<br/>视觉方案生成<br/>输入:systemData<br/>modificationCount=0]:::agent2
+    
+    %% ===== Agent 2 内部逻辑（含修改循环） =====
+    A2 --> GenCheck{AI生成<br/>结果?}:::decision
+    
+    %% 2.3.1 主路径：AI生成成功
+    GenCheck -->|成功<br/>fallbackInfo.level=0| VisualSelect[状态:visual_pending<br/>等待用户选择<br/>24h倒计时]:::selection
+
+		%% 用户选择阶段超时（从VisualSelect引出）
+		VisualSelect -->|24h无选择<br/>confirmationStatus=<br/>'expired'| Flow_A2_Timeout[Flow发送提醒<br/>标记sessionClosed]:::flow
+		Flow_A2_Timeout --> End3
+    
+    %% Agent 2修改循环（关键新增）
+    VisualSelect -->|选择schemeId<br/>更新selectedScheme| A3_Prep[标记<br/>isReference=false<br/>matchConfidence=1.0<br/>fallbackInfo.level=0]:::agent2
+    VisualSelect -->|要求修改<br/>且modificationCount&lt;2| A2_Modify[Agent 2<br/>重新生成<br/>modificationCount+1]:::agent2
+    VisualSelect -->|修改次数≥2<br/>防无限生成| Manual_A2[转人工设计师<br/>reason='excessive_<br/>visual_modification']:::manual
+    
+    A2_Modify --> GenCheck
+    Manual_A2 -->|人工出图<br/>更新Agent2Output| A3_Prep_Manual[标记<br/>isReference=true<br/>fallbackInfo.level=2]:::agent2
+    
+    %% 2.3.2 一级降级：AI生成失败 → 参考图库
+    GenCheck -->|失败/超时<br/>fallbackInfo.level=1| Fallback1[知识库检索<br/>匹配参考图<br/>计算相似度]:::fallback
+    Fallback1 --> RefCheck{相似度<br/>≥0.75?}:::decision
+    
+    RefCheck -->|是| RefSelect[展示3张参考图<br/>+差异说明<br/>+匹配度分数]:::selection
+    
+    %% 参考图修改循环（关键新增）
+    RefSelect -->|接受<br/>确认参考图<br/>fallbackInfo.<br/>userAccepted=true| A3_Prep_Ref[标记<br/>isReference=true<br/>fallbackInfo.level=1]:::agent2
+    RefSelect -->|要求修改<br/>且modificationCount&lt;2| A2_Modify
+    RefSelect -->|拒绝/不匹配| Fallback2[二级降级<br/>fallbackInfo.<br/>userAccepted=false]:::fallback
+    
+    RefCheck -->|否<br/>相似度&lt;0.75| Fallback2
+    
+    %% 2.3.3 二级降级：强制人工
+    Fallback2 --> Manual2[转人工设计师<br/>1v1沟通<br/>nextAgent='manual'<br/>reason='mismatch_<br/>rejected']:::manual
+    Manual2 --> ManualDecision{人工判断?}:::decision
+    ManualDecision -->|人工出图<br/>或确认方案| A3_Prep_Manual
+    ManualDecision -->|需求不明确| End1
+    
+    %% ===== Agent 3 及后续 =====
+    A3_Prep --> A3[Agent 3<br/>匠人匹配<br/>输入:selectedScheme]:::agent3
+    A3_Prep_Ref --> A3
+    A3_Prep_Manual --> A3
+    
+    A3 --> A3_CHECK{匹配结果?}:::decision
+    A3_CHECK -->|匹配为空| A3_FAIL[输出空列表<br/>nextAgent=manual]:::agent3
+    A3_FAIL --> MANUAL_MATCH[人工介入派单]:::manual
+    MANUAL_MATCH --> MANUAL_ORDER[人工创建订单]:::order
+    
+    A3_CHECK -->|匹配成功| A3_OUT[输出Top 3匠人<br/>craftsman_pending]:::agent3
+    
+    %% ===== 用户选择阶段 =====
+    A3_OUT --> USER_OP{用户操作?}:::user
+    
+    USER_OP -->|放弃| END_ABANDON([会话结束]):::endNode
+    USER_OP -->|超时24h| FLOW_TIMEOUT[Flow发送提醒]:::flow
+    FLOW_TIMEOUT --> END_EXPIRED([会话关闭]):::endNode
+    
+    USER_OP -->|换一批小于2次| A3_RETRY[重新匹配<br/>modificationCount+1]:::agent3
+    A3_RETRY --> A3_CHECK
+    
+    USER_OP -->|换一批大于等于2次| MANUAL_RETRY[转人工<br/>防止无限循环]:::manual
+    MANUAL_RETRY --> MANUAL_MATCH
+    
+    %% ===== 关键修正：用户确认路径 =====
+    USER_OP -->|确认选择匠人| ORDER_CREATE[订单创建<br/>状态confirmed<br/>合并三端数据]:::order
+    
+    ORDER_CREATE --> ORDER_DB[(订单库<br/>存储完整数据)]:::flow
+    MANUAL_ORDER --> ORDER_DB
+    
+    ORDER_DB --> FLOW_START[Flow进度监控<br/>规则引擎启动<br/>定时器激活]:::flow
+    
+    %% ===== 3.4 Flow进度监控（新增补充）=====
+    
+    %% Flow主循环：每日定时触发
+    FLOW_START -->|每日8:00定时触发| Flow_Daily{R1每日播报<br/>计算进度百分比}:::flow
+    Flow_Daily -->|生成进度卡片| Notify_User[推送用户<br/>进度+今日任务]:::flow
+    Flow_Daily -->|生成任务提醒| Notify_Craftsman[推送匠人<br/>待完成工序]:::flow
+    
+    %% 进度计算与状态判断
+    ORDER_DB -.->|读取实际进度| Check_Progress{检查进度偏差}:::decision
+    Check_Progress -->|actual < planned<br/>且差值≥0.5天| R2_Delay[触发R2延期预警<br/>标记riskFlag:delay_risk]:::flow
+    R2_Delay --> Notify_Both[双边推送预警<br/>用户端+匠人端]:::flow
+    
+    Check_Progress -->|剩余天数≤2| R4_Urgent[触发R4临近提醒<br/>提升频次]:::flow
+    Check_Progress -->|正常推进| Flow_Daily
+    
+    %% R5长期停滞检测（48小时）
+    ORDER_DB -.->|检查lastUpdateAt| Check_Stale{48小时无更新?}:::decision
+    Check_Stale -->|是| R5_Stale[触发R5长期停滞<br/>Flow_Stale_Progress]:::flow
+    R5_Stale -->|发送催单| Notify_Stale[双边提醒<br/>匠人端+用户端]:::flow
+    R5_Stale -->|标记stale状态| Update_Stale[progress.status=stale]:::flow
+    
+    %% 72小时无响应升级
+    Check_Stale -->|72小时仍无更新| Require_Intervention[标记requiresIntervention<br/>触发人工介入]:::manual
+    
+    %% 工序完成事件触发
+    Craftsman_Update[匠人标记工序完成<br/>上传照片]:::user -->|事件触发| R3_Complete[触发R3工序确认<br/>更新completedSteps]:::flow
+    R3_Complete -->|重新计算| Check_Progress
+    
+    %% 定时失效兜底
+    Flow_Daily -.->|定时器失效| Fallback_Schedule[标记scheduledMissed<br/>邮件兜底]:::fallback
+    Fallback_Schedule -->|次日9:00补发| Email_Fallback[合并版进度<br/>含昨日+今日]:::flow
+    
+    %% 交付完成
+    Check_Progress -->|匠人标记已完成| R6_Delivery[触发R6交付完成<br/>推送评价邀请]:::flow
+    R6_Delivery --> END_SUCCESS([订单完成<br/>状态:completed]):::startEnd
+    
+    %% 用户投诉贯穿全程（虚线表示）
+    AnyPoint -.->|用户点击投诉| Complaint_Flow[标记complaintFlag<br/>立即触发R5催单]:::flow
+    Complaint_Flow --> Require_Intervention
+    
+    %% 样式补充
+    style AnyPoint fill:none,stroke:none
+    style A3_Prep fill:#f3e5f5,stroke:#6a1b9a,stroke-width:1px
+    style A3_Prep_Ref fill:#f3e5f5,stroke:#6a1b9a,stroke-width:1px
+    style A3_Prep_Manual fill:#f3e5f5,stroke:#6a1b9a,stroke-width:1px
+    style A2_Modify fill:#f3e5f5,stroke:#6a1b9a,stroke-width:1px
+    style Manual_A1 fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style Manual_A2 fill:#ffebee,stroke:#c62828,stroke-width:2px
+    %% Flow状态流转
+    style Flow_Daily fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style Check_Progress fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style Check_Stale fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style R2_Delay fill:#fce4ec,stroke:#c2185b,stroke-width:1px
+    style R3_Complete fill:#fce4ec,stroke:#c2185b,stroke-width:1px
+    style R4_Urgent fill:#fce4ec,stroke:#c2185b,stroke-width:1px
+    style R5_Stale fill:#fce4ec,stroke:#c2185b,stroke-width:1px
+    style R6_Delivery fill:#fce4ec,stroke:#c2185b,stroke-width:1px
+            </div>
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-title">图例说明</div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#e8f5e9;border-color:#2e7d32"></div>
+            <span>开始/结束节点</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#e3f2fd;border-color:#1565c0"></div>
+            <span>用户操作</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#e8f5e9;border-color:#388e3c"></div>
+            <span>Agent 1 需求解析</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#f3e5f5;border-color:#6a1b9a"></div>
+            <span>Agent 2 视觉生成</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#fff3e0;border-color:#e65100"></div>
+            <span>Agent 3 匠人匹配</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#fce4ec;border-color:#c2185b"></div>
+            <span>Flow 进度监控</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#ffebee;border-color:#c62828"></div>
+            <span>人工介入</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background:#eceff1;border-color:#455a64"></div>
+            <span>降级/兜底方案</span>
+        </div>
+    </div>
+
+    <script>
+        let currentZoom = 1;
+        const diagram = document.getElementById('diagram');
+
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            securityLevel: 'loose'
+        });
+
+        // 渲染完成后隐藏loading
+        mermaid.init(undefined, document.querySelectorAll('.mermaid')).then(() => {
+            document.getElementById('loading').style.display = 'none';
+        });
+
+        function zoomIn() {
+            currentZoom += 0.1;
+            applyZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(0.3, currentZoom - 0.1);
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            diagram.style.transform = `scale(${currentZoom})`;
+            diagram.style.transformOrigin = 'top center';
+        }
+    </script>
+</body>
+</html>

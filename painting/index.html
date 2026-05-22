@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字里藏画 - AI图像生成工具</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+             background:#f5f6f7;color:#333;line-height:1.8;padding:16px}
+        .container{max-width:720px;margin:0 auto;background:#fff;border-radius:16px;
+                  padding:32px 24px;box-shadow:0 2px 16px rgba(0,0,0,0.06)}
+        
+        /* 顶部 */
+        .header{margin-bottom:28px}
+        .badge{display:inline-block;background:#e8f5e9;color:#2e7d32;padding:4px 14px;
+               border-radius:20px;font-size:13px;font-weight:600;margin-bottom:12px}
+        h1{font-size:28px;color:#1a1a1a;margin-bottom:8px}
+        .subtitle{color:#666;font-size:16px;margin-bottom:16px}
+        .link-box{background:#f8f9fa;border-radius:10px;padding:14px 16px;margin-top:12px;
+                  border-left:3px solid #d97757}
+        .link-box a{color:#d97757;text-decoration:none;font-size:15px;font-weight:500}
+        .link-box p{color:#888;font-size:13px;margin-top:6px}
+        
+        /* 板块 */
+        .section{margin-top:32px;padding-top:24px;border-top:1px solid #f0f0f0}
+        .section h2{font-size:20px;color:#1a1a1a;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+        .section h2::before{content:"";display:inline-block;width:4px;height:20px;
+                           background:#d97757;border-radius:2px}
+        .section p{color:#555;font-size:15px;margin-bottom:12px;line-height:1.8}
+        .section strong{color:#1a1a1a}
+        
+        /* 痛点高亮 */
+        .pain-point{background:#fff8e1;padding:16px;border-radius:10px;margin:12px 0;
+                    border-left:3px solid #ffc107}
+        .pain-point p{color:#5d4037;font-size:14px;margin:0}
+        .pain-point strong{color:#e65100}
+        
+        /* 标签 */
+        .tag{display:inline-block;background:#e3f2fd;color:#1565c0;padding:4px 12px;
+             border-radius:16px;font-size:12px;margin:0 6px 8px 0;font-weight:500}
+        .tag.green{background:#e8f5e9;color:#2e7d32}
+        .tag.orange{background:#fff3e0;color:#e65100}
+        
+        /* 数据卡片 */
+        .data-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+        .data-item{background:#f8f9fa;border-radius:10px;padding:16px;text-align:center}
+        .data-num{font-size:24px;font-weight:700;color:#d97757}
+        .data-label{font-size:13px;color:#666;margin-top:4px}
+        
+        /* 图片卡片 */
+        .img-card{background:#fafbfc;border-radius:12px;padding:16px;margin:16px 0;
+                  border:1px solid #ececec;text-align:center}
+        .img-card img{max-width:100%;border-radius:8px;border:1px solid #e0e0e0}
+        .img-caption{color:#888;font-size:13px;margin-top:10px;font-style:italic}
+        
+        /* 视频区域 */
+        .video-box{border-radius:12px;margin:16px 0;overflow:hidden}
+        
+        /* 功能卡片 */
+        .feature-grid{display:grid;grid-template-columns:1fr;gap:16px;margin:16px 0}
+        .feature-card{background:#fafbfc;border-radius:12px;padding:20px;
+                      border:1px solid #ececec}
+        .feature-card h3{font-size:17px;color:#1a1a1a;margin-bottom:10px;
+                         display:flex;align-items:center;gap:8px}
+        .feature-card h3 span{background:#d97757;color:#fff;width:28px;height:28px;
+                              border-radius:50%;display:flex;align-items:center;
+                              justify-content:center;font-size:14px;font-weight:700;
+                              flex-shrink:0}
+        .feature-card p{color:#555;font-size:14px;margin-bottom:10px;line-height:1.7}
+        
+        /* 前后对比 */
+        .compare-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+        .compare-item{background:#f8f9fa;border-radius:8px;padding:12px;text-align:center}
+        .compare-item .label{color:#888;font-size:12px;margin-bottom:8px}
+        
+        /* UI细节 */
+        .ui-detail{background:#fafbfc;border-radius:10px;padding:16px;margin:10px 0;
+                   display:flex;align-items:flex-start;gap:12px}
+        .ui-detail .dot{width:8px;height:8px;background:#d97757;border-radius:50%;
+                        margin-top:6px;flex-shrink:0}
+        .ui-detail p{color:#555;font-size:14px;margin:0}
+        
+        /* 时间线 */
+        .timeline{margin:16px 0;padding-left:20px;border-left:2px solid #e0e0e0}
+        .timeline-item{margin-bottom:16px;position:relative}
+        .timeline-item::before{content:"";position:absolute;left:-26px;top:6px;
+                              width:10px;height:10px;background:#d97757;border-radius:50%}
+        .timeline-item .version{font-weight:700;color:#1a1a1a}
+        .timeline-item .desc{color:#555;font-size:14px}
+        .timeline-item .metric{color:#d97757;font-size:13px;font-weight:600}
+        
+        /* 底部 */
+        .footer{margin-top:36px;padding-top:20px;border-top:1px solid #eee;
+                color:#999;font-size:13px;text-align:center}
+        
+        @media(max-width:480px){
+            .compare-box{grid-template-columns:1fr}
+            .data-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 返回首页 -->
+        <div style="margin-bottom: 8px;">
+            <a href="../index.html" style="color: #d97757; text-decoration: none; font-size: 14px; font-weight: 500;">← 返回首页</a>
+        </div>
+        <!-- 顶部 -->
+        <div class="header">
+            <span class="badge">已上线 · Coze低代码</span>
+            <h1>字里藏画</h1>
+            <p class="subtitle">AI图像生成工具 · 文生图+同款复刻+重塑画面 · 3天MVP</p>
+            <div style="margin-top:12px">
+                <span class="tag">Coze工作流</span>
+                <span class="tag green">文生图</span>
+                <span class="tag orange">图生图</span>
+                <span class="tag">图像增强</span>
+                <span class="tag green">Prompt工程</span>
+            </div>
+            <div class="link-box">
+                <a href="https://43wjtntrj6.coze.site/" target="_blank">🌐 访问在线站点：https://43wjtntrj6.coze.site/</a>
+                <p>基于Coze平台搭建，独立验证生图能力边界后API接入主项目</p>
+            </div>
+        </div>
+
+        <!-- 项目背景 -->
+        <div class="section">
+            <h2>项目背景与痛点</h2>
+            <p>在做「渐成画迹」习惯App时，需要大量风格统一的激励图片素材。一开始去豆包找图、做同款、改内容，但过程中发现两个很实际的痛点：</p>
+            
+            <div class="pain-point">
+                <p><strong>痛点一：</strong>我的Prompt和生成记录都保存在豆包平台上，相当于创作资产存在别人家里，<<strong>隐私和长期可控性都有风险</strong>。</p>
+            </div>
+            <div class="pain-point">
+                <p><strong>痛点二：</strong>项目后面肯定还要新增更多图片类型，每次去豆包重新调风格很麻烦，<<strong>没法快速复用同一风格生成系列图</strong>。</p>
+            </div>
+            
+            <p>所以决定自建一个平台：一是能<strong>自己保存和管理Prompt</strong>；二是能<strong>在这个平台直接生图</strong>，记录不会被外界存走。同时在Coze应用商店里也看到不少类似的生图产物，说明这个需求是存在的。</p>
+        </div>
+
+        <!-- 核心功能：视频放这里 -->
+        <div class="section">
+            <h2>核心功能展示</h2>
+            <p>功能上没有想得太复杂，核心就是<strong>文生图 + 同款复刻 + 重塑画面</strong>。3天内在Coze上完成MVP搭建并上线。</p>
+            
+            <!-- 视频 -->
+            <div class="video-box">
+                <video controls preload="metadata" style="width:100%;border-radius:8px;display:block">
+                    <source src="./字里藏画演示.mp4" type="video/mp4">
+                    您的浏览器不支持视频播放
+                </video>
+            </div>
+            <p class="img-caption" style="text-align:center">视频：鼠标悬停触发做同款 → 自动填充Prompt → 一键出图 → 输入修改指令 → 重塑画面 → 一键高清</p>
+
+            <div class="feature-grid">
+                <!-- 功能1：文生图 -->
+                <div class="feature-card">
+                    <h3><span>1</span>文生图</h3>
+                    <p>输入描述，选择画幅比例（1:1 / 2:3 / 4:3 / 9:16 / 16:9），点击一键出图。我项目本身只用1:1，但考虑到通用性，通过Coze选择器节点做了五档切换，<<strong>用最小成本预留扩展性</strong>。</p>
+                    
+                    <!-- 截图1：首页.png -->
+                    <div class="img-card">
+                        <img src="./首页.png" alt="首页">
+                        <p class="img-caption">图1：首页瀑布流 + 底部输入框 + 画幅选择 + 一键出图按钮</p>
+                    </div>
+                </div>
+
+                <!-- 功能2：同款复刻 -->
+                <div class="feature-card">
+                    <h3><span>2</span>同款复刻</h3>
+                    <p>这个功能是最关键的——里面的图片和Prompt都是我做习惯App时<strong>真实验证过的</strong>，比如像素风头像、拼豆图案这些。用户点"做同款"，本质上是在复用我验证过的有效Prompt，<<strong>保证风格一致性</strong>，解决系列图生产效率问题。</p>
+                    
+                    <!-- 截图2：做同款.png -->
+                    <div class="img-card">
+                        <img src="./做同款.png" alt="做同款">
+                        <p class="img-caption">图2：鼠标悬停图片时显示Prompt文本 + "做同款"按钮</p>
+                    </div>
+                </div>
+
+                <!-- 功能3：重塑画面 -->
+                <div class="feature-card">
+                    <h3><span>3</span>重塑画面</h3>
+                    <p>基于原图+修改指令的迭代生成，满足"同一风格下的变体"需求。比如输入"改成男生"，在保持背景、风格、构图不变的情况下替换主体。这也是小红书上"求Prompt改图"的高频场景。</p>
+                    
+                    <!-- 截图3+4：局部修改前后对比 -->
+                    <div class="compare-box">
+                        <div class="compare-item">
+                            <div class="label">修改前（女生）</div>
+                            <img src="./局部修改.png" alt="修改前" style="max-width:100%;border-radius:6px">
+                        </div>
+                        <div class="compare-item">
+                            <div class="label">修改后（男生）</div>
+                            <img src="./局部修改效果.png" alt="修改后" style="max-width:100%;border-radius:6px">
+                        </div>
+                    </div>
+                    <p class="img-caption" style="text-align:center">图3-4：输入"改成男生" → 重塑画面 → 保持风格一致的主体替换</p>
+                </div>
+
+                <!-- 功能4：一键高清 -->
+                <div class="feature-card">
+                    <h3><span>4</span>一键高清</h3>
+                    <p>看到Coze工作流里本身就可以添加图像增强节点，所以尝试加进去了。能让输出图片的清晰度提升一档，<<strong>用于解决品质底线</strong>。</p>
+                    
+                    <!-- 截图5：结果.png -->
+                    <div class="img-card">
+                        <img src="./结果.png" alt="生成结果">
+                        <p class="img-caption">图5：生成完成后的高清结果图展示</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UI细节 -->
+        <div class="section">
+            <h2>UI细节：零代码成本的体验优化</h2>
+            <p>UI上刻意做了几个细节，都是围绕<strong>信息密度控制和操作反馈</strong>：</p>
+            
+            <div class="ui-detail">
+                <div class="dot"></div>
+                <p><strong>悬停显隐策略：</strong>做同款按钮和对应的Prompt不会一直显示——只有用户鼠标经过那张图的时候才会出现。这样界面不会堆满文字和按钮，保持干净。</p>
+            </div>
+            <div class="ui-detail">
+                <div class="dot"></div>
+                <p><strong>图片悬停放大：</strong>已有的图片在鼠标悬停时会放大一点，给足动态感，让用户感知到这是可交互的。</p>
+            </div>
+            <div class="ui-detail">
+                <div class="dot"></div>
+                <p><strong>按钮暗度反馈：</strong>底部三个按钮（重塑、高清等）悬停时会变暗几度，给明确的反馈——这些微交互都是零代码成本但能让体验更精致。</p>
+            </div>
+        </div>
+
+        <!-- 技术实现 -->
+        <div class="section">
+            <h2>技术实现与架构设计</h2>
+            
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-num">3天</div>
+                    <div class="data-label">MVP搭建周期</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">210</div>
+                    <div class="data-label">积分/次成本</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">2</div>
+                    <div class="data-label">阶段架构</div>
+                </div>
+            </div>
+
+            <p><strong>人机协作范式：</strong>以Coze节点化工作流为核心开发环境，践行「人定产品逻辑与验收标准，AI负责节点配置与Prompt调优」。</p>
+            
+            <p><strong>两阶段架构策略：</strong></p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="version">一期：独立网页验证</div>
+                    <div class="desc">验证生图能力边界（质量、成本、速度），现在工具已经能服务我自己的素材生产</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="version">二期：API中台接入</div>
+                    <div class="desc">发布Coze API让习惯App直接调用，实现"完成习惯→自动生成激励图"的闭环。设计缓存+降级策略控制API调用成本</div>
+                </div>
+            </div>
+
+            <!-- 截图6：生图中.png -->
+            <div class="img-card">
+                <img src="./生图中.png" alt="生图中">
+                <p class="img-caption">图6：Coze应用真实loading状态（彩色圆点动画），证明是上线运营的真实产品</p>
+            </div>
+        </div>
+
+        <!-- 成果与反思 -->
+        <div class="section">
+            <h2>成果与反思</h2>
+            <p><strong style="color:#d97757">核心成果：</strong>上线后外部数据是0，但我并不觉得失败——<<strong>它首先是一个服务我自己的工具</strong>，我的习惯App素材问题确实被解决了。</p>
+            
+            <p><strong>架构决策验证：</strong>重来我还是会做独立网页，因为这是<strong>验证假设的最小闭环</strong>。直接嵌入习惯App会让两个项目的进度和风险耦合在一起——如果生图效果不达标，主项目也会被拖慢。</p>
+            
+            <p><strong>如果重来会前置：</strong><strong>接口标准化设计</strong>。让网页端的同款ID、画幅参数、输出格式直接兼容未来的API调用，减少二期接入时的改造成本。</p>
+        </div>
+
+        <!-- 与渐成画迹联动 -->
+        <div class="section">
+            <h2>与「渐成画迹」的联动价值</h2>
+            <p>这个项目不是孤立的小工具，而是<strong>卫星工具矩阵</strong>的一部分：</p>
+            <p>• 基于主项目素材需求，独立开发AI生图工具作为<strong>能力中台</strong></p>
+            <p>• 验证「风格模板化」产品假设，采用<strong>「独立验证→API接入」</strong>策略解耦风险</p>
+            <p>• 二期将发布Coze API实现habit解锁时<strong>自动生成激励素材</strong>的自动化闭环</p>
+            <p>• 两个项目解耦，不会因为生图模块的风险拖慢主项目进度</p>
+        </div>
+
+        <div class="footer">
+            项目周期：2026.04 · 独立设计与开发 · Coze低代码平台<br>
+        </div>
+    </div>
+</body>
+</html>

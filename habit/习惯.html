@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>渐成画迹 - 习惯App作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontSize: {
+                        'title': '28px',
+                        'section': '20px',
+                        'subtitle': '16px',
+                        'body': '15px',
+                        'badge': '13px',
+                        'tag': '12px',
+                    },
+                    colors: {
+                        warm: { DEFAULT: '#D97757', 50: '#fdf0eb', 100: '#fbe0d6', 200: '#f5c1ad', 300: '#efa284', 400: '#e9835b', 500: '#D97757', 600: '#c05a3a', 700: '#a0452a', 800: '#80351f', 900: '#602515' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        *{scrollbar-width:none;-ms-overflow-style:none}
+        *::-webkit-scrollbar{display:none}
+        html,body{height:100%;overflow:hidden}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.8}
+        .img-ph{background:#f0ede5;border:2px dashed #ddd;border-radius:8px;text-align:center}
+        h1.title{font-size:28px}
+        h2.section{font-size:20px}
+        p.subtitle{font-size:16px}
+        p.body-text{font-size:15px}
+        span.badge{display:inline-block;background:#e3f2fd;color:#1565c0;padding:4px 14px;
+                   border-radius:20px;font-size:13px;font-weight:600;margin-bottom:12px}
+        span.tag{font-size:12px}
+        .data-num{font-size:24px;font-weight:700;color:#D97757}
+        .data-label{font-size:13px;color:#666;margin-top:4px}
+    </style>
+</head>
+<body class="bg-[#f5f6f7] font-sans antialiased p-3">
+<div class="w-full max-w-[393px] md:max-w-2xl mx-auto bg-white rounded-2xl shadow-[0_2px_16px_rgba(0,0,0,0.06)] overflow-y-auto max-h-[calc(100vh-24px)]">
+
+    <!-- 返回首页 -->
+    <div class="px-5 pt-4 pb-0">
+        <a href="../index.html" style="color: #D97757; text-decoration: none; font-size: 14px; font-weight: 500;">← 返回首页</a>
+    </div>
+
+    <!-- ═══ 第1层：顶部名片区 ═══ -->
+    <div class="px-5 pt-4 pb-4">
+        <span class="badge">已上线 · 独立产品</span>
+        <h1 class="title font-bold text-[#1a1a1a] leading-tight mb-2">渐成画迹</h1>
+        <p class="subtitle text-[#666] leading-relaxed">微习惯追踪App · 从0到1独立产品 · 已上线运营</p>
+
+        <div class="link-box bg-[#f8f9fa] rounded-xl p-3.5 mt-4 border-l-4 border-[#D97757]">
+            <a href="https://habit-tracker-painting.ccwu.cc/" target="_blank" class="text-[#D97757] font-medium text-[15px] no-underline hover:underline">🌐 habit-tracker-painting.ccwu.cc</a>
+            <p class="text-[#888] text-[13px] mt-1.5">Vue 3 + TypeScript · Pinia · Tailwind · IndexedDB </p>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5 mt-4">
+            <span class="tag bg-[#e3f2fd] text-[#1565c0] font-medium px-3 py-1 rounded-full">Vue 3</span>
+            <span class="tag bg-[#eaf0f7] text-[#6a9bcc] font-medium px-3 py-1 rounded-full">TypeScript</span>
+            <span class="tag bg-[#eef0ea] text-[#788c5d] font-medium px-3 py-1 rounded-full">Pinia</span>
+            <span class="tag bg-[#f0eef2] text-[#9b8aa3] font-medium px-3 py-1 rounded-full">Tailwind</span>
+            <span class="tag bg-[#fdf0eb] text-[#c07a5a] font-medium px-3 py-1 rounded-full">IndexedDB</span>
+            <span class="tag bg-[#f0eef2] text-[#9b8aa3] font-medium px-3 py-1 rounded-full">Capacitor</span>
+        </div>
+
+        <div class="bg-[#f8f9fa] rounded-xl p-3.5 mt-4">
+            <p class="text-[#555] text-[15px] leading-relaxed"><span class="font-semibold text-[#D97757]">我的角色：</span>独立产品负责人。从需求调研、PRD撰写、原型设计到技术架构、前后端开发、测试验收、上线部署，全流程独立完成。</p>
+        </div>
+    </div>
+
+    <!-- ═══ 第2层：需求发现与验证（基于1需求发现验证.md） ═══ -->
+    <div class="px-5 pt-6 pb-2 border-t border-[#f0f0f0]">
+        <h2 class="section font-bold text-[#1a1a1a] flex items-center gap-2 mb-4">
+            <span class="inline-block w-1 h-5 bg-[#D97757] rounded-sm"></span>需求发现与验证
+        </h2>
+
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 mb-4 border border-[#f0ede5]">
+            <p class="text-sm font-semibold text-[#1a1a1a] mb-1.5">触发点</p>
+            <p class="text-[#555] text-[15px] leading-relaxed">2026年初Vibe Coding爆火，我有技术背景但做毕设时经常凌晨3-4点写代码，深刻体会到<strong class="text-warm">工具效率对执行力的影响</strong>。当时使用一款鸿蒙版微习惯App，遇到5个痛点：</p>
+            <ul class="list-disc list-inside mt-2 text-[#666] text-[13px] space-y-1">
+                <li>排序经常Bug，自定义排序没实现，还是按新增顺序排</li>
+                <li>分数算法不透明，不知道今天为什么得这个分</li>
+                <li>没有多标签分类，工作和健身习惯混在一起</li>
+                <li>想要临时记个事，但App不支持临时事项</li>
+                <li>进度展示全是数据太枯燥，没有成就感</li>
+            </ul>
+        </div>
+
+        <p class="text-[#555] text-[15px] font-semibold mb-2.5">用户验证与竞品分析</p>
+        <div class="bg-warm-50 rounded-xl p-3.5 mb-3 border border-warm/20">
+            <p class="text-[15px] font-semibold text-warm mb-1">访谈5位朋友，4位有类似痛点</p>
+            <p class="text-[#555] text-[15px] leading-relaxed">调研了4款主流产品（微习惯、微笑ToDo、Forest、Todoist），发现市场<strong>两极分化</strong>——要么太游戏化（Forest断签惩罚、积分排名造成焦虑），要么太工具化（冰冷数据列表，但分数不透明、缺多标签、无法临时记事项）。</p>
+        </div>
+
+        <div class="mb-3">
+            <p class="text-[#555] text-[15px] font-semibold mb-2">竞品对比结论</p>
+            <div class="space-y-2">
+                <div class="bg-[#faf9f5] border-l-4 border-warm rounded-r-lg pl-3.5 pr-3 py-2.5">
+                    <p class="text-[15px] font-semibold text-[#1a1a1a]">微习惯</p>
+                    <p class="text-[#666] text-[13px] mt-0.5">纯工具型，排序Bug，分数不透明，无标签，无临时事项</p>
+                </div>
+                <div class="bg-[#faf9f5] border-l-4 border-[#c49ba8] rounded-r-lg pl-3.5 pr-3 py-2.5">
+                    <p class="text-[15px] font-semibold text-[#1a1a1a]">微笑ToDo</p>
+                    <p class="text-[#666] text-[13px] mt-0.5">工具+情感化，但习惯/待办分离，无程度打卡，无多标签</p>
+                </div>
+                <div class="bg-[#faf9f5] border-l-4 border-[#7da3a8] rounded-r-lg pl-3.5 pr-3 py-2.5">
+                    <p class="text-[15px] font-semibold text-[#1a1a1a]">Forest</p>
+                    <p class="text-[#666] text-[13px] mt-0.5">专注场景强但习惯追踪弱，有惩罚机制增加焦虑</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 mb-3 border border-[#f0ede5]">
+            <p class="text-sm font-semibold text-warm mb-1">差异化定位：零压力伴侣型习惯追踪工具</p>
+            <p class="text-[#555] text-[15px] leading-relaxed"><strong>渐成画迹 = 微习惯理念（小目标、无压力）+ 像素画渐进激励（从模糊到清晰）+ 零压力设计（权重冻结、无断签惩罚）</strong></p>
+            <p class="text-[#555] text-[15px] leading-relaxed mt-1.5">定位在"游戏化过头"和"工具感太强"之间，强调<strong>'自我对话'</strong>而非外部比较。满足"零压力+视觉激励+算法透明+多标签+临时事项"。</p>
+        </div>
+
+        <div class="bg-warm-50 rounded-xl p-3.5 border border-warm/20">
+            <p class="text-[15px] font-semibold text-warm mb-1">名字由来：「渐成画迹」</p>
+            <p class="text-[#555] text-[15px] leading-relaxed">从Trae AI多轮对话后10个选项中挑选——<strong>渐进养成，留下痕迹</strong>。符合微习惯'小步快跑'的理念，'画迹'呼应拼豆像素画的视觉主题。每一次打卡都是一笔，日积月累，渐成画迹。</p>
+        </div>
+    </div>
+
+    <!-- ═══ 第3层：核心功能展示（基于3核心功能设计.md） ═══ -->
+    <div class="px-5 pt-6 pb-2 border-t border-[#f0f0f0]">
+        <h2 class="section font-bold text-[#1a1a1a] flex items-center gap-2 mb-4">
+            <span class="inline-block w-1 h-5 bg-[#D97757] rounded-sm"></span>核心功能
+        </h2>
+
+        <!-- 今日混合清单 -->
+        <div class="mb-5">
+            <div class="flex items-start gap-3 mb-2.5">
+                <span class="w-6 h-6 bg-warm text-white text-[15px] font-bold rounded-full flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div>
+                    <h3 class="text-sm font-bold text-[#1a1a1a]">今日混合清单</h3>
+                    <p class="text-[#666] text-[15px] mt-0.5 leading-relaxed"><strong>应出现算法</strong>（自动判断今天该做什么）+ <strong>双区标签页</strong>（今日待办置顶区 / 其余区）+ <strong>稳定排序</strong>（手动拖拽持久化 + 规则排序共存不覆盖）。固定习惯与临时事项混合同屏，临时事项用虚线边框区分，同等排序权重。统一 <code class="bg-warm-50 text-[#c05a3a] px-1 rounded text-[12px]">TodayListItem</code> 数据结构，通过 <code class="bg-warm-50 text-[#c05a3a] px-1 rounded text-[12px]">kind</code> 字段区分类型。排序状态按视图key隔离持久化（<code class="bg-warm-50 text-[#c05a3a] px-1 rounded text-[12px]">today_YYYY-MM-DD</code>），退出后恢复手动顺序。</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-3">
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/今日页面原型1.png" alt="今日页面原型1 - 未完成状态" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/今日页面原型2.png" alt="今日页面原型2 - 完成与归档状态" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/标签页面原型1.png" alt="标签页面原型1 - 健康分类" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/标签页面原型2.png" alt="标签页面原型2 - 全部标签" class="w-full h-auto">
+                </div>
+            </div>
+            <p class="text-[#888] text-[13px] italic mt-1.5 text-center">图1：今日清单与标签页面原型（上排：今日页面两种状态 / 下排：标签页面两种分类）</p>
+        </div>
+
+        <!-- 打卡与补打卡 -->
+        <div class="mb-5">
+            <div class="flex items-start gap-3 mb-2.5">
+                <span class="w-6 h-6 bg-warm text-white text-[15px] font-bold rounded-full flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div>
+                    <h3 class="text-sm font-bold text-[#1a1a1a]">打卡与补打卡</h3>
+                    <p class="text-[#666] text-[15px] mt-0.5 leading-relaxed">核心公式 <code class="bg-warm-50 text-[#c05a3a] px-1 rounded text-[13px]">dayCompletion = min(1, doneCount / target)</code>，目标≥2时逐步+1。补打卡"双限制"策略：仅过去日期可补 + 仅「应出现日」可补；非应出现日被拦截并弹窗说明原因（如"该习惯按每周一设置，此日期不应出现"）。复用 <code class="bg-warm-50 text-[#c05a3a] px-1 rounded text-[12px]">shouldAppear</code> 算法确保补打卡限制与日常展示逻辑一致。打卡按钮三态视觉反馈（+1态 / 完成态 / 禁用态）。</p>
+                </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0] mb-3">
+                <img src="部分原型/日历页面原型.png" alt="日历页面原型 - 日历回顾视图" class="w-full h-auto">
+            </div>
+            <p class="text-[#888] text-[13px] italic mt-1.5 text-center">图2：日历回顾页（月视图圆点标记 + 选中日详情清单 + 补打卡入口）</p>
+        </div>
+
+        <!-- 拼豆激励系统 -->
+        <div class="mb-5">
+            <div class="flex items-start gap-3 mb-2.5">
+                <span class="w-6 h-6 bg-warm text-white text-[15px] font-bold rounded-full flex items-center justify-center shrink-0 mt-0.5">3</span>
+                <div>
+                    <h3 class="text-sm font-bold text-[#1a1a1a]">拼激励系统</h3>
+                    <p class="text-[#666] text-[15px] mt-0.5 leading-relaxed">核心差异化功能。每次打卡获得1权重，15权重分5阶段渐进解锁（阶段1:3、阶段2:6、阶段3:9、阶段4:12、阶段5:15）。clarity递进公式：<code class="bg-warm-50 text-[#c05a3a] px-1 rounded text-[13px]">0.4 + 0.6 × min(1, weight/15)</code>。<strong>权重冻结机制</strong>：<code class="bg-warm-50 text-[#c05a3a] px-1 rounded text-[12px]">weightEarned</code> 一旦为 true 永不回退，保护用户成就感（损失厌恶心理学）。三标签结构：当前阶段（主拼图+预览）+ 全部图案（已解锁/待解锁）+ 照片箱子（阶段4/5自动弹出快照保存，最多50张LRU）。CSS Grid实现225个DOM节点渐进显现（blur/opacity），非Canvas。</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-3">
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/激励页面原型1.png" alt="激励页面原型1 - 阶段4快照保存弹窗" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/激励页面原型2.png" alt="激励页面原型2 - 照片箱子" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/激励页面原型3.png" alt="激励页面原型3 - 全部图案类型1/2" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/激励页面原型4.png" alt="激励页面原型4 - 全部图案类型3" class="w-full h-auto">
+                </div>
+            </div>
+            <p class="text-[#888] text-[13px] italic mt-1.5 text-center">图3：拼豆激励页（上排：阶段4快照弹窗 / 照片箱子 / 下排：全部图案类型筛选）</p>
+        </div>
+
+        <!-- 标签系统 -->
+        <div class="mb-4">
+            <div class="flex items-start gap-3 mb-2.5">
+                <span class="w-6 h-6 bg-warm text-white text-[15px] font-bold rounded-full flex items-center justify-center shrink-0 mt-0.5">4</span>
+                <div>
+                    <h3 class="text-sm font-bold text-[#1a1a1a]">标签系统</h3>
+                    <p class="text-[#666] text-[15px] mt-0.5 leading-relaxed">多标签绑定（<code class="bg-warm-50 text-[#c05a3a] px-1 rounded text-[12px]">habitTagIds: string[]</code>），支持交叉分类。标签页<strong>双区结构</strong>：置顶区=应出现且未完成，其余区=不应出现或已完成；不受日历选中日期影响（标签页"今日"固定为本地今天）。标签长按管理（编辑/删除色）。排序系统：手动拖拽 / 名称A-Z / 创建时间 / 完成进度四种规则，手动排序优先级高于规则排序永不覆盖。用户反馈"置顶区就是我今天要做的，找习惯快多了"。</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-3">
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/标签页面原型1.png" alt="标签页面原型1 - 健康分类筛选" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/标签页面原型2.png" alt="标签页面原型2 - 全部标签+PRD说明" class="w-full h-auto">
+                </div>
+            </div>
+            <p class="text-[#888] text-[13px] italic mt-1.5 text-center">图4：标签页双区布局（左：健康分类筛选 / 右：全部标签+PRD说明弹窗）</p>
+        </div>
+
+        <!-- 统计系统 -->
+        <div class="mb-5">
+            <div class="flex items-start gap-3 mb-2.5">
+                <span class="w-6 h-6 bg-warm text-white text-[15px] font-bold rounded-full flex items-center justify-center shrink-0 mt-0.5">5</span>
+                <div>
+                    <h3 class="text-sm font-bold text-[#1a1a1a]">统计系统</h3>
+                    <p class="text-[#666] text-[15px] mt-0.5 leading-relaxed">支持<strong>日/周/月/年</strong>四维周期切换。日视图展示今日进度环+打卡列表；周视图展示完成趋势柱状图+习惯榜单（次数/完成率/共打排序）；月视图展示月度打卡日历+习惯榜单；年视图展示年度打卡热力图+习惯榜单。所有统计口径透明可查（产品说明入口），数据本地存储于IndexedDB。</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-3">
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/统计页面原型1.png" alt="统计页面原型1 - 日视图" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/统计页面原型2.png" alt="统计页面原型2 - 周视图" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/统计页面原型3.png" alt="统计页面原型3 - 月视图" class="w-full h-auto">
+                </div>
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                    <img src="部分原型/统计页面原型4.png" alt="统计页面原型4 - 年视图" class="w-full h-auto">
+                </div>
+            </div>
+            <p class="text-[#888] text-[13px] italic mt-1.5 text-center">图5：统计页四维视图（上排：日视图 / 周视图 / 下排：月视图 / 年视图）</p>
+        </div>
+
+        <!-- 设置页面 -->
+        <div class="mb-4">
+            <div class="flex items-start gap-3 mb-2.5">
+                <span class="w-6 h-6 bg-warm text-white text-[15px] font-bold rounded-full flex items-center justify-center shrink-0 mt-0.5">6</span>
+                <div>
+                    <h3 class="text-sm font-bold text-[#1a1a1a]">设置与数据管理</h3>
+                    <p class="text-[#666] text-[15px] mt-0.5 leading-relaxed"><strong>核心功能</strong>：产品说明（统计口径/频率规则/归档语义集中解释）+ 归档习惯库（管理已归档习惯，支持手动启用恢复）。<strong>提醒与通知</strong>：全局提醒开关 + 免打扰时段设置（22:00-08:00）。<strong>数据管理</strong>：导出/导入数据（JSON备份）+ 清空数据。支持深色模式切换与10种主题颜色自定义，实时预览生效。</p>
+                </div>
+            </div>
+            <div class="flex justify-center mb-3">
+                <div class="rounded-xl overflow-hidden border border-[#f0f0f0] max-w-[280px]">
+                    <img src="部分原型/设置页面原型.png" alt="设置页面原型 - 核心功能/提醒通知/数据管理" class="w-full h-auto">
+                </div>
+            </div>
+            <p class="text-[#888] text-[13px] italic mt-1.5 text-center">图6：设置页（产品说明 / 归档习惯库 / 提醒通知 / 数据导出导入）</p>
+        </div>
+    </div>
+
+    <!-- ═══ 第4层：产品定义与技术架构（基于2产品定义与范围决策.md） ═══ -->
+    <div class="px-5 pt-6 pb-2 border-t border-[#f0f0f0]">
+        <h2 class="section font-bold text-[#1a1a1a] flex items-center gap-2 mb-4">
+            <span class="inline-block w-1 h-5 bg-[#D97757] rounded-sm"></span>产品定义与技术架构
+        </h2>
+
+        <div class="bg-warm-50 rounded-xl p-3.5 mb-4 border border-warm/20">
+            <p class="text-[15px] font-semibold text-warm mb-1">P0核心问题定义</p>
+            <div class="space-y-1.5 text-[#555] text-[15px] leading-relaxed">
+                <p>① <strong>怎么让用户愿意开始？</strong> → 降低启动门槛（无需注册登录、3分钟创建习惯）</p>
+                <p>② <strong>怎么让用户愿意持续？</strong> → 正向激励而非负向惩罚（权重冻结、拼豆渐进）</p>
+                <p>③ <strong>怎么让用户信任数据？</strong> → 统计透明、口径清晰（产品说明集中解释）</p>
+            </div>
+        </div>
+
+        <p class="text-[#555] text-[15px] font-semibold mb-2.5">Kano模型 + 2×2矩阵决策</p>
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 mb-4 border border-[#f0ede5]">
+            <div class="space-y-2">
+                <div class="flex gap-2">
+                    <span class="text-warm font-bold text-[15px] shrink-0 w-8">P0</span>
+                    <p class="text-[#666] text-[13px] leading-relaxed">高价值低成本（拼豆激励/临时事项混排/标签系统）→ 差异化竞争；低价值低成本（打卡/提醒/日历）→ 产品底线必须做</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[#6a9bcc] font-bold text-[15px] shrink-0 w-8">P1</span>
+                    <p class="text-[#666] text-[13px] leading-relaxed">高价值高成本（云同步）→ Repository模式预留扩展，P1可低成本接入Supabase</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-[#9b8aa3] font-bold text-[15px] shrink-0 w-8">排除</span>
+                    <p class="text-[#666] text-[13px] leading-relaxed">反向需求（社交/排行榜/番茄钟）→ 做了降低满意度，与"零压力自我对话"定位冲突</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-[#555] text-[15px] font-semibold mb-2.5">四分文档体系</p>
+        <div class="grid grid-cols-2 gap-2.5 mb-4">
+            <div class="bg-[#faf9f5] rounded-xl p-3 border border-[#f0ede5]">
+                <div class="text-[#6a9bcc] text-[15px] font-semibold mb-1">PRD</div>
+                <div class="text-[#1a1a1a] text-sm font-bold mb-1">产品需求文档</div>
+                <div class="text-[#888] text-[13px] leading-relaxed">15项FR · 6大场景 · 3类画像 · P0/P1/P2分级 · 24项AC验收标准</div>
+            </div>
+            <div class="bg-[#faf9f5] rounded-xl p-3 border border-[#f0ede5]">
+                <div class="text-[#788c5d] text-[15px] font-semibold mb-1">TDD</div>
+                <div class="text-[#1a1a1a] text-sm font-bold mb-1">技术设计文档</div>
+                <div class="text-[#888] text-[13px] leading-relaxed">组件树 · 数据流 · 路由设计 · 核心算法 · API设计</div>
+            </div>
+            <div class="bg-[#faf9f5] rounded-xl p-3 border border-[#f0ede5]">
+                <div class="text-[#9b8aa3] text-[15px] font-semibold mb-1">DBD</div>
+                <div class="text-[#1a1a1a] text-sm font-bold mb-1">数据库设计</div>
+                <div class="text-[#888] text-[13px] leading-relaxed">7张核心表 · ER关系 · 索引策略 · Repository模式</div>
+            </div>
+            <div class="bg-[#faf9f5] rounded-xl p-3 border border-[#f0ede5]">
+                <div class="text-[#c49ba8] text-[15px] font-semibold mb-1">TestPlan</div>
+                <div class="text-[#1a1a1a] text-sm font-bold mb-1">测试计划</div>
+                <div class="text-[#888] text-[13px] leading-relaxed">24项AC · 5层测试 · 原型验收23/24通过</div>
+            </div>
+        </div>
+
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 mb-4 border border-[#f0ede5]">
+            <p class="text-sm font-semibold text-[#1a1a1a] mb-2">文档体系价值</p>
+            <p class="text-[#555] text-[15px] leading-relaxed">核心原则<strong>"先定义验收标准，再写代码"</strong>。PRD定义24项AC → HTML原型验证23/24项 → TDD输出架构设计和核心算法 → AI按TDD生成代码 → TestPlan逐项验收。需求层面<strong>0次返工</strong>，四分文档交叉检查确保口径一致。</p>
+        </div>
+
+
+
+        <p class="text-[#555] text-[15px] font-semibold mb-2.5">技术选型决策</p>
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 mb-4 border border-[#f0ede5]">
+            <div class="space-y-2">
+                <div class="flex items-start gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warm shrink-0 mt-1.5"></span>
+                    <div>
+                        <p class="text-[15px] font-semibold text-[#1a1a1a]">Vue 3 + TypeScript + Pinia</p>
+                        <p class="text-[#666] text-[13px]">Composition API适合复杂状态管理，TS类型安全减少AI代码bug</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warm shrink-0 mt-1.5"></span>
+                    <div>
+                        <p class="text-[15px] font-semibold text-[#1a1a1a]">IndexedDB + Dexie.js</p>
+                        <p class="text-[#666] text-[13px]">容量大（>5MB）、Promise封装代码量减少60%，接口存储无关可低成本迁移Supabase</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warm shrink-0 mt-1.5"></span>
+                    <div>
+                        <p class="text-[15px] font-semibold text-[#1a1a1a]">Capacitor</p>
+                        <p class="text-[#666] text-[13px]">无需审核快速迭代，Capacitor作为提醒功能补丁（原生通知）</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warm shrink-0 mt-1.5"></span>
+                    <div>
+                        <p class="text-[15px] font-semibold text-[#1a1a1a]">CSS Grid像素渲染（非Canvas）</p>
+                        <p class="text-[#666] text-[13px]">225个DOM节点完全可控，调试方便，Tailwind直接调blur/opacity实现渐进效果</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-[#555] text-[15px] font-semibold mb-2.5">核心算法</p>
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 mb-4 border border-[#f0ede5]">
+            <div class="space-y-3">
+                <div>
+                    <p class="text-[15px] font-semibold text-[#1a1a1a] mb-1">① shouldAppear 判定</p>
+                    <div class="bg-white rounded-lg p-2.5 border border-[#f0f0f0]">
+                        <code class="text-[13px] text-[#555]">today >= startDate && 频率匹配 && !paused && !archived</code>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-[15px] font-semibold text-[#1a1a1a] mb-1">② dayCompletion 计算</p>
+                    <div class="bg-white rounded-lg p-2.5 border border-[#f0f0f0]">
+                        <code class="text-[13px] text-[#555]">dayCompletion = min(1, doneCount / target)</code>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-[15px] font-semibold text-[#1a1a1a] mb-1">③ 权重冻结</p>
+                    <div class="bg-white rounded-lg p-2.5 border border-[#f0f0f0]">
+                        <code class="text-[13px] text-[#555]">canEarnWeight: if(alreadyEarned) return false; return doneCount >= target</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="核心算法图1.png" alt="核心算法图1 - shouldAppear判定与频率变更" class="w-full h-auto">
+            </div>
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="核心算法图2.png" alt="核心算法图2 - 权重冻结与连续性算法" class="w-full h-auto">
+            </div>
+        </div>
+        <p class="text-[#888] text-[13px] italic mt-1.5 mb-4 text-center">图6：TDD核心算法（左：shouldAppear判定 / 右：权重冻结与连续性算法）</p>
+
+        <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="DBD1.png" alt="DBD数据库表结构图1 - habits/checkins/oneOffTasks索引" class="w-full h-auto">
+            </div>
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="DBD2.png" alt="DBD数据库表结构图2 - Checkin/OneOffTask/Tag字段定义" class="w-full h-auto">
+            </div>
+        </div>
+        <p class="text-[#888] text-[13px] italic mt-1.5 mb-4 text-center">图7：DBD数据库表结构（左：索引定义 / 右：字段定义）</p>
+
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 border border-[#f0ede5]">
+            <p class="text-sm font-semibold text-[#1a1a1a] mb-2">设计系统</p>
+            <p class="text-[#666] text-[15px] leading-relaxed">低饱和温暖色系，主色 <span class="inline-block w-3 h-3 bg-[#D97757] rounded align-middle"></span> #D97757。6色辅色板 + 深色/浅色双模式CSS变量。间距系统xs(4px)→2xl(32px)，列表触控最小高度48px，安全区域适配 env(safe-area-inset-*)。</p>
+        </div>
+    </div>
+
+    <!-- ═══ 第5层：质量保障与数据（基于4质量保障与测试验证.md） ═══ -->
+    <div class="px-5 pt-6 pb-2 border-t border-[#f0f0f0]">
+        <h2 class="section font-bold text-[#1a1a1a] flex items-center gap-2 mb-4">
+            <span class="inline-block w-1 h-5 bg-[#D97757] rounded-sm"></span>质量保障与数据
+        </h2>
+
+        <div class="grid grid-cols-3 gap-2.5 mb-4">
+            <div class="bg-[#faf9f5] rounded-xl p-3.5 text-center">
+                <div class="text-2xl font-bold text-warm">16</div>
+                <div class="text-[#666] text-[13px] mt-1">高保真原型</div>
+            </div>
+            <div class="bg-[#faf9f5] rounded-xl p-3.5 text-center">
+                <div class="text-2xl font-bold text-[#6a9bcc]">24</div>
+                <div class="text-[#666] text-[13px] mt-1">验收标准(AC)</div>
+            </div>
+            <div class="bg-[#faf9f5] rounded-xl p-3.5 text-center">
+                <div class="text-2xl font-bold text-[#788c5d]">23/24</div>
+                <div class="text-[#666] text-[13px] mt-1">原型通过</div>
+            </div>
+            <div class="bg-[#faf9f5] rounded-xl p-3.5 text-center">
+                <div class="text-2xl font-bold text-[#9b8aa3]">&lt;500ms</div>
+                <div class="text-[#666] text-[13px] mt-1">100+习惯计算</div>
+            </div>
+            <div class="bg-[#faf9f5] rounded-xl p-3.5 text-center">
+                <div class="text-2xl font-bold text-[#c49ba8]">50</div>
+                <div class="text-[#666] text-[13px] mt-1">快照上限(LRU)</div>
+            </div>
+            <div class="bg-[#faf9f5] rounded-xl p-3.5 text-center">
+                <div class="text-2xl font-bold text-[#7da3a8]">10</div>
+                <div class="text-[#666] text-[13px] mt-1">内存LRU缓存</div>
+            </div>
+        </div>
+
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 mb-3.5 border border-[#f0ede5]">
+            <p class="text-sm font-semibold text-[#1a1a1a] mb-2.5">原型验收成果</p>
+            <div class="space-y-2">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500 shrink-0"></span><span class="text-[#555] text-[15px]"><strong>23/24通过（95.8%）</strong> —— 15项直接确认 + 8项部分通过需技术实现</span></div>
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-warm shrink-0"></span><span class="text-[#555] text-[15px]"><strong>1项留待代码验证</strong>：补打卡限制逻辑（AC-6）</span></div>
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#6a9bcc] shrink-0"></span><span class="text-[#555] text-[15px]"><strong>核心验证通过</strong>：AC-1创建打卡、AC-5双区结构、AC-9激励页、AC-12日历</span></div>
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#788c5d] shrink-0"></span><span class="text-[#555] text-[15px]"><strong>空态覆盖</strong>：标签页有空原型；今日清单/照片箱子用v-if渲染</span></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="原型验收1.png" alt="原型验收表1 - AC-1至AC-7验收结果" class="w-full h-auto">
+            </div>
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="原型验收2.png" alt="原型验收表2 - AC-11至AC-18验收结果" class="w-full h-auto">
+            </div>
+        </div>
+        <p class="text-[#888] text-[13px] italic mt-1.5 mb-4 text-center">图8：原型验收表 — 23/24项AC通过（上：AC-1~7 / 下：AC-11~18）</p>
+
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 mb-3.5 border border-[#f0ede5]">
+            <p class="text-sm font-semibold text-[#1a1a1a] mb-2.5">Bug修复记录</p>
+            <p class="text-[#666] text-[13px] leading-relaxed mb-2">发现2个关键Bug并修复：</p>
+            <div class="space-y-2">
+                <div class="bg-white rounded-lg p-2.5 border-l-3 border-warm">
+                    <p class="text-[15px] font-semibold text-[#1a1a1a]">Bug1：补打卡"应出现日"校验</p>
+                    <p class="text-[#666] text-[13px] mt-0.5">错误：补打卡时未校验频率，导致非应出现日也能补打卡<br>修复：复用 shouldAppear 算法统一校验补打卡资格<br>影响：修复后补打卡限制逻辑100%通过AC-6验收</p>
+                </div>
+                <div class="bg-white rounded-lg p-2.5 border-l-3 border-[#6a9bcc]">
+                    <p class="text-[15px] font-semibold text-[#1a1a1a]">Bug2：拼豆页面状态同步</p>
+                    <p class="text-[#666] text-[13px] mt-0.5">错误：打卡后权重增加，但clarity未同步更新<br>修复：Pinia Store触发视图刷新<br>影响：225个DOM节点blur/opacity即时响应</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 mb-3.5 border border-[#f0ede5]">
+            <p class="text-sm font-semibold text-[#1a1a1a] mb-2.5">测试分层策略</p>
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center"><span class="text-[#555] text-[15px]">① 程序化测试</span><span class="text-[#888] text-[13px]">shouldAppear / completion / 连续性 单元测试</span></div>
+                <div class="flex justify-between items-center"><span class="text-[#555] text-[15px]">② 人工判断</span><span class="text-[#888] text-[13px]">UI交互流程 · 视觉一致性 · 异常提示语</span></div>
+                <div class="flex justify-between items-center"><span class="text-[#555] text-[15px]">③ 真机测试</span><span class="text-[#888] text-[13px]">iOS Safari · Android Chrome · P安装测试</span></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="测试报告1.png" alt="测试报告1 - 测试概述与覆盖模块" class="w-full h-auto">
+            </div>
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="测试报告2.png" alt="测试报告2 - habits store测试详情" class="w-full h-auto">
+            </div>
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="测试报告3.png" alt="测试报告3 - checkins store测试详情" class="w-full h-auto">
+            </div>
+            <div class="rounded-xl overflow-hidden border border-[#f0f0f0]">
+                <img src="测试报告4.png" alt="测试报告4 - 性能数据与LRU缓存策略" class="w-full h-auto">
+            </div>
+        </div>
+        <p class="text-[#888] text-[13px] italic mt-1.5 mb-4 text-center">图9：测试报告（上排：测试概述 / habits store / 下排：checkins store / 性能数据）</p>
+
+        <div class="bg-[#faf9f5] rounded-xl p-3.5 border-l-4 border-warm">
+            <p class="text-[15px]"><span class="font-semibold text-warm">P0冻结原则：</span><span class="text-[#555]">P0功能（创建习惯/今日打卡/激励显示）在UI冻结后不可新增，仅修复阻断级缺陷。证明<strong>范围管理意识</strong>——知道什么东西必须在deadline前守住。</span></p>
+        </div>
+    </div>
+
+    <!-- ═══ 第6层：项目成果与数据验证（基于5项目成果与数据验证.md） ═══ -->
+    <div class="px-5 pt-6 pb-4 border-t border-[#f0f0f0]">
+        <h2 class="section font-bold text-[#1a1a1a] flex items-center gap-2 mb-4">
+            <span class="inline-block w-1 h-5 bg-[#D97757] rounded-sm"></span>成果与反思
+        </h2>
+
+        <div class="grid grid-cols-1 gap-3 mb-4">
+            <div class="bg-warm-50 rounded-xl p-3.5 border border-warm/20">
+                <div class="flex items-center gap-2 mb-1.5"><span class="text-base">🚀</span><span class="text-sm font-bold text-[#1a1a1a]">已上线运营</span></div>
+                <p class="text-[#555] text-[15px] leading-relaxed">部署到 <a href="https://habit-tracker-painting.ccwu.cc/" target="_blank" class="text-warm font-medium underline underline-offset-2">habit-tracker-painting.ccwu.cc</a>
+            </div>
+
+            <div class="bg-[#faf9f5] rounded-xl p-3.5 border border-[#f0ede5]">
+                <div class="flex items-center gap-2 mb-1.5"><span class="text-base">🧪</span><span class="text-sm font-bold text-[#1a1a1a]">用户测试反馈</span></div>
+                <p class="text-[#555] text-[15px] leading-relaxed">5位目标用户完成试用。<strong>正向</strong>：拼豆激励"有收集欲"、标签双区"清晰"、打卡动画"有满足感"。<strong>改进</strong>：补打卡规则需更透明、希望更多图案类型。</p>
+            </div>
+
+            <div class="bg-[#faf9f5] rounded-xl p-3.5 border border-[#f0ede5]">
+                <div class="flex items-center gap-2 mb-1.5"><span class="text-base">💡</span><span class="text-sm font-bold text-[#1a1a1a]">面试叙事价值</span></div>
+                <p class="text-[#555] text-[15px] leading-relaxed">按"发现→定义→设计→验证"叙事线：</p>
+                <ul class="text-[#555] text-[13px] mt-1.5 space-y-1 list-disc list-inside marker:text-warm">
+                    <li><strong>微习惯理念产品化</strong> — 不追求连续打卡，设计零压力习惯追踪机制</li>
+                    
+                    <li><strong>文档驱动开发</strong> — PRD→TDD→DBD→TestPlan四阶段，每个决策都有据可查</li>
+                    <li><strong>心理学原理应用</strong> — 目标梯度效应（Goal-Gradient Effect）：接近目标时加速努力；禀赋效应（Endowment Effect）：已获得权重永不回退</li>
+                </ul>
+            </div>
+
+            <div class="bg-[#faf9f5] rounded-xl p-3.5 border border-[#f0ede5]">
+                <div class="flex items-center gap-2 mb-1.5"><span class="text-base">🔄</span><span class="text-sm font-bold text-[#1a1a1a]">如果重来</span></div>
+                <ul class="text-[#555] text-[13px] space-y-1 list-disc list-inside marker:text-warm">
+                    <li><strong>多设备同步放在P1是否合理？</strong> — 早期更应聚焦核心激励体验，同步需求来自用户反馈而非初期预判</li>
+                    <li><strong>更早做用户测试</strong> — 原型验收阶段已有3个可用性问题流出到开发阶段，如果更早做可用性测试能节省迭代成本</li>
+                    <li><strong>设计系统先于组件开发</strong> — 前期直接写组件导致后期颜色/间距不统一，重构了一次设计系统接入</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="text-center mt-6 pt-4 border-t border-[#f0f0f0]">
+            <div class="inline-flex items-center gap-3 bg-[#faf9f5] rounded-full px-5 py-2.5 border border-[#f0ede5]">
+                <span class="text-[#888] text-[15px]">📧</span>
+                <a href="mailto:yexingtao@example.com" class="text-warm text-[15px] font-medium no-underline hover:underline">yexingtao@example.com</a>
+                <span class="text-[#ddd]">|</span>
+                <span class="text-[#888] text-[15px]">📱</span>
+                <span class="text-[#555] text-[15px]">+86 138-0000-0000</span>
+            </div>
+            <p class="text-[#999] text-[11px] mt-3">项目周期 2026.03-2026.05 · 独立全流程 · Vue 3 + TypeScript + Capacitor</p>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

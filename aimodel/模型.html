@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI模型日报 - 项目详情</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+             background:#f5f6f7;color:#333;line-height:1.8;padding:16px}
+        .container{max-width:720px;margin:0 auto;background:#fff;border-radius:16px;
+                  padding:32px 24px;box-shadow:0 2px 16px rgba(0,0,0,0.06)}
+        .header{margin-bottom:28px}
+        .badge{display:inline-block;background:#e3f2fd;color:#1565c0;padding:4px 14px;
+               border-radius:20px;font-size:13px;font-weight:600;margin-bottom:12px}
+        h1{font-size:28px;color:#1a1a1a;margin-bottom:8px}
+        .subtitle{color:#666;font-size:16px;margin-bottom:16px}
+        .link-box{background:#f8f9fa;border-radius:10px;padding:14px 16px;margin-top:12px;
+                  border-left:3px solid #1565c0}
+        .link-box a{color:#1565c0;text-decoration:none;font-size:15px;font-weight:500}
+        .link-box p{color:#888;font-size:13px;margin-top:6px}
+        
+        .section{margin-top:32px;padding-top:24px;border-top:1px solid #f0f0f0}
+        .section h2{font-size:20px;color:#1a1a1a;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+        .section h2::before{content:"";display:inline-block;width:4px;height:20px;
+                           background:#1565c0;border-radius:2px}
+        .section p{color:#555;font-size:15px;margin-bottom:12px;line-height:1.8}
+        .highlight{color:#d97757;font-weight:700}
+        
+        .img-card{background:#fafbfc;border-radius:12px;padding:16px;margin:16px 0;
+                  border:1px solid #ececec;text-align:center}
+        .img-card img{max-width:100%;border-radius:8px;border:1px solid #e0e0e0}
+        .img-caption{color:#888;font-size:13px;margin-top:10px;font-style:italic}
+        
+        .data-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:16px 0}
+        .data-item{background:#f8f9fa;border-radius:10px;padding:16px;text-align:center}
+        .data-num{font-size:24px;font-weight:700;color:#1565c0}
+        .data-label{font-size:13px;color:#666;margin-top:4px}
+        
+        .flow-box{background:#f8f9fa;border-radius:10px;padding:18px;margin:12px 0}
+        .flow-step{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+        .flow-step:last-child{margin-bottom:0}
+        .step-num{background:#1565c0;color:#fff;width:24px;height:24px;border-radius:50%;
+                  display:flex;align-items:center;justify-content:center;font-size:13px;
+                  font-weight:700;flex-shrink:0}
+        .step-text{font-size:14px;color:#555;line-height:1.6}
+        
+        .tag{display:inline-block;background:#e8f5e9;color:#2e7d32;padding:4px 12px;
+             border-radius:16px;font-size:12px;margin:0 6px 8px 0;font-weight:500}
+        .tag.blue{background:#e3f2fd;color:#1565c0}
+        .tag.orange{background:#fff3e0;color:#e65100}
+        
+        .footer{margin-top:36px;padding-top:20px;border-top:1px solid #eee;
+                color:#999;font-size:13px;text-align:center}
+        @media(max-width:480px){.data-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 返回首页 -->
+        <div style="margin-bottom: 8px;">
+            <a href="../index.html" style="color: #1565c0; text-decoration: none; font-size: 14px; font-weight: 500;">← 返回首页</a>
+        </div>
+        <!-- 顶部 -->
+        <div class="header">
+            <span class="badge">已上线 · Coze低代码</span>
+            <h1>AI模型日报</h1>
+            <p class="subtitle">每日追踪全球AI大模型动态 · 五维评估框架 · 场景化选型推荐</p>
+            <div class="link-box">
+                <a href="https://43wjtntrj6.coze.site/" target="_blank">🌐 访问在线站点：https://43wjtntrj6.coze.site/</a>
+                <p>基于Coze平台搭建，每日自动抓取多源数据，输出结构化日报与排名</p>
+            </div>
+        </div>
+
+        <!-- 项目背景 -->
+        <div class="section">
+            <h2>项目背景与痛点</h2>
+            <p>2025年下半年起，AI行业进入"无稳定范式"阶段，模型日更级迭代，但信息分散在Twitter、HuggingFace、各公司博客等6+平台，缺乏统一评估标准。</p>
+            <p>作为准备转型AI PM的开发者，我自身面临严重的<strong>信息焦虑</strong>——今天OpenAI发GPT-5.4，明天DeepSeek更新V4，后天Google推Gemini 3.1 Pro，却不知道新模型和旧模型有什么区别、可以用在哪里。访谈3位正在用AI做项目的开发者朋友后，确认这是行业共性问题：选型靠试错，平均花费2天手动对比多平台数据。</p>
+            <p class="highlight">这不是我个人的焦虑，而是一个可以被产品化解决的效率问题。</p>
+        </div>
+
+        <!-- 核心设计：五维评估 -->
+        <div class="section">
+            <h2>核心设计：五维评估框架</h2>
+            <p>参考行业主流基准测试（AIME测数学、GPQA测科学、SWE-bench测代码、HumanEval测编程），但做了<strong>产品化改造</strong>——把技术评测转化为用户可理解的选型维度。</p>
+            
+            <div style="margin:14px 0">
+                <span class="tag">领域知识深度</span>
+                <span class="tag">任务专项能力</span>
+                <span class="tag blue">交互与可控性</span>
+                <span class="tag orange">成本与效率</span>
+                <span class="tag">生态与部署</span>
+            </div>
+            
+            <p>每项1-10分，将"模型很强"转化为"<strong>场景X适合用模型Y，因为Z</strong>"。例如：Grok 4.20强调"实时网络搜索+2M上下文"，立即标记为"信息检索类任务首选"；Claude Opus 4.7强调"高清视觉解析+工程代码"，标记为"代码审查+文档分析首选"。</p>
+            
+            <!-- 截图1：五维评分总览页 -->
+            <div class="img-card">
+                <img src="./model1.jpg" alt="五维评分总览">
+                <p class="img-caption">图1：五维评分总览页（领域知识/任务专项/交互可控/成本效率/生态部署）</p>
+            </div>
+        </div>
+
+        <!-- 数据看板 -->
+        <div class="section">
+            <h2>数据看板：TOP 10 与模型分类</h2>
+            <p>基于最新模型评测数据，输出综合评分TOP 10排名，同时按<strong>国际大模型</strong>与<strong>国内大模型</strong>分类展示，方便不同部署环境下的选型参考。</p>
+            
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-num">20+</div>
+                    <div class="data-label">监控公司</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">40+</div>
+                    <div class="data-label">模型版本</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">11</div>
+                    <div class="data-label">应用场景</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">每日</div>
+                    <div class="data-label">自动更新</div>
+                </div>
+            </div>
+            
+            <!-- 截图2：TOP10总览页 -->
+            <div class="img-card">
+                <img src="./model2.jpg" alt="TOP10模型总览">
+                <p class="img-caption">图2：TOP 10模型总览 + 国际/国内大模型分类看板</p>
+            </div>
+        </div>
+
+        <!-- 场景化推荐 -->
+        <div class="section">
+            <h2>场景化选型：11个日常场景TOP 10</h2>
+            <p>日常使用中意识到五维评分颗粒度不够——比如"任务专项能力"维度下，某模型逻辑推理强但创意生成弱。因此设计<strong>二级标签体系</strong>，将每个维度拆分为子能力标签，让"场景匹配"更精准。</p>
+            <p>覆盖场景：多文件信息提取、文件内容对比、创意写作、视频脚本、图片生成、代码编程、数据分析、多语言翻译、语音对话、日常通用等。</p>
+            
+            <!-- 截图3：场景选型指南 -->
+            <div class="img-card">
+                <img src="./model3.jpg" alt="场景选型指南">
+                <p class="img-caption">图3：场景选型指南（多文件信息提取等11个场景当日TOP 10）</p>
+            </div>
+        </div>
+
+        <!-- 模型档案 -->
+        <div class="section">
+            <h2>模型档案：最新一代主力模型</h2>
+            <p>建立"模型清单"档案页，分国际/国内两大阵营，记录每款模型的版本、发布日期、核心特性、上一代主力、模型特点。解决"新模型和旧模型有什么区别"的对比痛点。</p>
+            
+            <!-- 截图4：最新一代主力模型页 -->
+            <div class="img-card">
+                <img src="./model4.jpg" alt="最新一代主力模型">
+                <p class="img-caption">图4：最新一代主力模型档案（国际/国内分类，含版本、特性、对比）</p>
+            </div>
+        </div>
+
+        <!-- 技术实现 -->
+        <div class="section">
+            <h2>技术实现：自动化工作流</h2>
+            <p>设计每日更新流水线，解决信息聚合与持续运营问题：</p>
+            
+            <div class="flow-box">
+                <div class="flow-step">
+                    <span class="step-num">1</span>
+                    <span class="step-text"><strong>全网搜索</strong>：LLM Stats、LMSYS、HuggingFace等6个监控源，识别24h内新模型或版本更新</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">2</span>
+                    <span class="step-text"><strong>模型建档</strong>：识别所属公司与版本号，更新"模型清单"表格</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">3</span>
+                    <span class="step-text"><strong>五维评分</strong>：根据评测数据与基准测试，给出1-10分评分</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">4</span>
+                    <span class="step-text"><strong>场景排名</strong>：更新11个场景的TOP 10排名（如有变化）</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">5</span>
+                    <span class="step-text"><strong>输出简报</strong>：生成每日简报（新模型/评分变动/场景排名变动/一句话总结）</span>
+                </div>
+            </div>
+            
+            <p><strong>工程约束与解决方案：</strong>Coze沙箱环境容器会回收导致定时任务丢失。设计"一键更新"手动触发 + 外部cron-job.org定时调度的<strong>双保险方案</strong>，保证日报可用性。</p>
+        </div>
+
+        <!-- 成果与价值 -->
+        <div class="section">
+            <h2>成果与实际应用</h2>
+            <p>过去30天基于日报完成<span class="highlight">2个真实选型决策</span>：</p>
+            <p>1. <strong>习惯App图像生成模块</strong>：对比Seedream 5.0 Lite与Midjourney v7，最终选择Seedream——因为成本效率维度得分更高，免费额度足够MVP使用。</p>
+            <p>2. <strong>个人技术内容写作</strong>：固定使用Kimi K2.6，因为超长上下文窗口维度得分最高，适合长文档分析。</p>
+            <p style="margin-top:16px"><strong>方法论沉淀：</strong>建立可复用的模型评估方法论，训练出"5分钟判断新模型价值"的能力：1分钟提取发布信息→2分钟五维初评→2分钟场景匹配标记。</p>
+        </div>
+
+        <div class="footer">
+            项目周期：2026.04 - 2026.05 · 独立策划与开发 · Coze + Node.js
+        </div>
+    </div>
+</body>
+</html>
