@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>叶杏涛 - 作品集</title>
+    <title>叶杏涛 - IT BA / 产品方向</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -86,7 +86,7 @@
 
         /* 头部 */
         .header {
-            margin-bottom: 48px;
+            margin-bottom: 36px;
         }
 
         .name {
@@ -103,7 +103,20 @@
             color: #888;
             font-weight: 300;
             letter-spacing: 2px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+        }
+
+        .value-prop {
+            font-size: 15px;
+            color: #aaa;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .value-prop .highlight {
+            color: #d97757;
+            font-weight: 600;
         }
 
         .tags {
@@ -131,19 +144,44 @@
             background: rgba(217, 119, 87, 0.08);
         }
 
+        /* 核心数据指标 */
+        .metrics {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 36px;
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-num {
+            font-size: 32px;
+            font-weight: 700;
+            color: #d97757;
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: #666;
+            margin-top: 6px;
+        }
+
         /* 分隔线 */
         .divider {
             width: 60px;
             height: 2px;
             background: linear-gradient(90deg, transparent, #d97757, transparent);
-            margin: 0 auto 48px;
+            margin: 0 auto 36px;
         }
 
         /* 项目卡片网格 */
         .projects {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
+            gap: 16px;
             width: 100%;
         }
 
@@ -152,7 +190,7 @@
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 16px;
-            padding: 28px 20px;
+            padding: 24px 16px;
             text-decoration: none;
             color: inherit;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -184,23 +222,23 @@
         }
 
         .project-icon {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            margin: 0 auto 16px;
+            font-size: 20px;
+            margin: 0 auto 12px;
             background: rgba(217, 119, 87, 0.1);
             border: 1px solid rgba(217, 119, 87, 0.2);
         }
 
         .project-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: #fff;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             line-height: 1.4;
         }
 
@@ -208,12 +246,19 @@
             font-size: 12px;
             color: #666;
             line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .project-proof {
+            font-size: 11px;
+            color: #d97757;
+            font-weight: 500;
         }
 
         .project-badge {
             display: inline-block;
-            margin-top: 12px;
-            padding: 4px 10px;
+            margin-top: 10px;
+            padding: 3px 10px;
             border-radius: 10px;
             font-size: 11px;
             font-weight: 500;
@@ -224,7 +269,7 @@
 
         /* 底部 */
         .footer {
-            margin-top: 48px;
+            margin-top: 36px;
             color: #444;
             font-size: 13px;
             letter-spacing: 1px;
@@ -234,6 +279,9 @@
         @media (max-width: 1024px) {
             .projects {
                 grid-template-columns: repeat(3, 1fr);
+            }
+            .metrics {
+                gap: 24px;
             }
         }
 
@@ -255,6 +303,10 @@
             html, body {
                 overflow: auto;
             }
+            .metrics {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
         }
     </style>
 </head>
@@ -268,15 +320,39 @@
             <div class="header">
                 <h1 class="name">叶杏涛</h1>
                 <p class="role">IT BA / 产品方向 · 1年多企业级项目经验</p>
+                <p class="value-prop">
+                    从<strong class="highlight">需求洞察</strong>到<strong class="highlight">产品落地</strong>，从<strong class="highlight">流程设计</strong>到<strong class="highlight">数据验证</strong>。<br>
+                    擅长将复杂业务抽象为标准化产品方案，用数据驱动决策。
+                </p>
                 <div class="tags">
                     <span class="tag">需求分析</span>
-                    <span class="tag">流程设计</span>
+                    <span class="tag">PRD输出</span>
                     <span class="tag">原型设计</span>
-                    <span class="tag">技术文档</span>
-                    <span class="tag">UAT测试</span>
-                    <span class="tag">上线迭代</span>
+                    <span class="tag">全生命周期管理</span>
+                    <span class="tag">数据驱动</span>
+                    <span class="tag">跨部门协同</span>
+                    <span class="tag">AI工具提效</span>
                     <span class="tag">粤语流利</span>
                     <span class="tag">CET-6</span>
+                </div>
+            </div>
+
+            <div class="metrics">
+                <div class="metric-item">
+                    <div class="metric-num">5+</div>
+                    <div class="metric-label">完整项目</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-num">4</div>
+                    <div class="metric-label">企业级系统</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-num">2.5周</div>
+                    <div class="metric-label">MVP最快交付</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-num">99%+</div>
+                    <div class="metric-label">数据准确率</div>
                 </div>
             </div>
 
@@ -286,35 +362,40 @@
                 <a href="./bupa/index.html" class="project-card">
                     <div class="project-icon">💼</div>
                     <div class="project-title">奔步 × BUPA</div>
-                    <div class="project-desc">企业级保险核心业务系统重构，投保指令自动化、Sales Lead全生命周期管理</div>
+                    <div class="project-desc">企业级保险核心业务系统重构</div>
+                    <div class="project-proof">日处理200+Case · 99%+准确率</div>
                     <span class="project-badge">企业交付</span>
                 </a>
 
                 <a href="./habit/index.html" class="project-card">
                     <div class="project-icon">🎯</div>
                     <div class="project-title">渐成画迹</div>
-                    <div class="project-desc">微习惯追踪App，从0到1独立产品，拼豆像素画渐进激励系统</div>
+                    <div class="project-desc">微习惯追踪App · 0到1独立产品</div>
+                    <div class="project-proof">满意度4.6/5 · 98.4%测试通过</div>
                     <span class="project-badge">独立产品</span>
                 </a>
 
                 <a href="./painting/index.html" class="project-card">
                     <div class="project-icon">🎨</div>
                     <div class="project-title">字里藏画</div>
-                    <div class="project-desc">AI图像生成工具，文生图+同款复刻+重塑画面，3天MVP上线</div>
+                    <div class="project-desc">AI图像生成工具 · 3天MVP</div>
+                    <div class="project-proof">风格复刻 · API中台规划</div>
                     <span class="project-badge">AI工具</span>
                 </a>
 
                 <a href="./embroidery/index.html" class="project-card">
                     <div class="project-icon">🧵</div>
                     <div class="project-title">AI刺绣定制</div>
-                    <div class="project-desc">4-Agent串联架构，非遗刺绣定制平台，需求解析→图案生成→匠人匹配</div>
+                    <div class="project-desc">4-Agent架构 · 非遗定制平台</div>
+                    <div class="project-proof">85%测试通过 · 0.04元/次</div>
                     <span class="project-badge">架构设计</span>
                 </a>
 
                 <a href="./aimodel/index.html" class="project-card">
                     <div class="project-icon">📊</div>
                     <div class="project-title">AI模型日报</div>
-                    <div class="project-desc">每日追踪全球AI大模型动态，五维评估框架，场景化选型推荐</div>
+                    <div class="project-desc">五维评估 · 场景化选型</div>
+                    <div class="project-proof">覆盖40+模型 · 11场景</div>
                     <span class="project-badge">数据产品</span>
                 </a>
             </div>
