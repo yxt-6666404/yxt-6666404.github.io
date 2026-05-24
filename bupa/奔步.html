@@ -56,6 +56,10 @@
             margin-top: 32px
         }
 
+        .section-first {
+            margin-top: 16px
+        }
+
         .section h2 {
             font-size: 19px;
             color: #1a1a1a;
@@ -170,16 +174,18 @@
 
 <body>
     <div class="container">
-        <div style="margin-bottom: 8px;">
-            <a href="../index.html" style="color: #2a6ee6; text-decoration: none; font-size: 14px; font-weight: 500;">← 返回首页</a>
+        <!-- 返回上一页 -->
+        <div style="padding: 16px 0 0;">
+            <a href="javascript:history.back()"
+                style="color: #D97757; text-decoration: none; font-size: 14px; font-weight: 500;">← 返回上一页</a>
         </div>
 
         <!-- 企业项目：BUPA -->
-        <div class="section">
-            <h2>企业项目经验</h2>
+        <div class="section section-first">
+            <h2>企业项目经验-广州奔步电脑有限公司</h2>
 
-            <div class="card">
-                <h3>奔步电脑 × BUPA保险核心业务系统</h3>
+            <div class="card" id="bupa">
+                <h3>BUPA保险核心业务系统</h3>
                 <p>
                     <span class="badge">企业交付</span>
                     <span class="badge">英文文档</span>
@@ -195,26 +201,41 @@
                 <p>梳理从SharePoint文档接收到Dataverse
                     Case/Task生成的全链路业务逻辑。设计定时调度机制（每日10:00/15:00双批次），覆盖文件定位、Excel解析、Case生成、异常补偿四个环节。</p>
                 <img src="./bupa2.png" alt="BUPA投保指令自动化流程">
+                <p style="text-align:center">图1</p>
+
 
                 <p><b>2. 异常补偿与数据闭环</b></p>
                 <p>定义"Not Ready
                     Case"异常状态与自动修复规则：定时扫描数据库遗留记录→反向追溯SharePoint源文件→动态校验完整性→补充字段并状态迁移→联动Task创建与属性回写。实现业务流程<span
                         class="highlight">100%闭环</span>，零数据遗漏。</p>
                 <img src="./bupa4.png" alt="异常补偿与数据闭环">
+                <p style="text-align:center">图2</p>
+
 
                 <p><b>3. Sales Lead全生命周期与版本管理</b></p>
                 <p>梳理销售线索从Draft到Closed的状态机流转，定义节点准入条件与分支逻辑。设计审计追踪机制：任何状态变更自动触发历史记录生成，满足金融合规要求。针对保险表单频繁变更场景，设计Placing
                     Form三层版本控制（自动存档+手动快照+历史锁定）。</p>
 
-                <div style="display:flex;gap:12px;margin-top:12px">
-                    <img src="奔步/bupa5.png" alt="Sales Lead全生命周期与版本管理" style="flex:1;min-width:0">
-                    <img src="奔步/bupa6.png" alt="Sales Lead全生命周期与版本管理" style="flex:1;min-width:0">
+                <div style="display:flex;gap:12px;margin-top:12px;align-items:stretch">
+                    <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+                        <div style="flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;border:1px solid #eee">
+                            <img src="./bupa5.png" alt="Sales Lead全生命周期与版本管理" style="width:100%;height:100%;object-fit:cover;margin-top:0;border:none;border-radius:0">
+                        </div>
+                        <p style="text-align:center">图3</p>
+                    </div>
+                    <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+                        <div style="flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;border:1px solid #eee">
+                            <img src="./bupa6.png" alt="Sales Lead全生命周期与版本管理" style="width:100%;height:100%;object-fit:cover;margin-top:0;border:none;border-radius:0">
+                        </div>
+                        <p style="text-align:center">图4</p>
+                    </div>
                 </div>
 
                 <p><b>4. 跨系统集成与数据架构</b></p>
                 <p>设计SharePoint-Dataverse-OneDrive-Exchange Online四方联动方案。构建Virtual Table架构集成外部数据源（Insurer/GEB Client
                     List），定义数据字典与接口规范写入英文交接文档。</p>
                 <img src="./bupa3.png" alt="跨系统集成与数据架构">
+                <p style="text-align:center">图5</p>
 
                 <p><b>量化成果：</b></p>
                 <p>• 系统上线后每日自动化处理<span class="highlight">200+</span>投保指令Case，零人工干预<br>
@@ -222,10 +243,11 @@
                     • <span class="highlight">2个月</span>内完成Phase 1交付并进入Phase 2迭代</p>
 
                 <img src="./bupa1.png" alt="跨系统集成与数据架构">
+                <p style="text-align:center">图6</p>
             </div>
 
             <!-- Power Approval -->
-            <div class="compact-card">
+            <div class="compact-card" id="power-approval">
                 <h4>Power Approval - 企业审批流程动态化重构</h4>
                 <div>
                     <span class="tag">需求洞察</span>
@@ -239,7 +261,7 @@
             </div>
 
             <!-- ISTM -->
-            <div class="compact-card">
+            <div class="compact-card" id="itsm">
                 <h4>ISTM - IT服务双通道审批与权限自动化</h4>
                 <div>
                     <span class="tag">痛点挖掘</span>
@@ -251,16 +273,31 @@
                     Automate模块，实现App端与邮件端<strong>统一触发同一Flow</strong>，获业务部门明确认可<br>
                     • <strong>权限自动化</strong>：设计外部合作伙伴入驻的自动权限配置方案，系统自动分配Business Unit/Role/Manager，降低运维成本与人为错误率<br>
                     • <strong>数据看板</strong>：规划复杂业务数据展示逻辑，将Customer Page嵌入Model-Driven App，聚合关键审批信息</p>
-                <div style="display:flex;gap:12px;margin-top:12px">
-                    <img src="./itsm1.png" style="flex:1;min-width:0">
-                    <img src="./itsm2.png" style="flex:1;min-width:0">
-                    <img src="./itsm3.png" style="flex:1;min-width:0">
+                <div style="display:flex;gap:12px;margin-top:12px;align-items:stretch">
+                    <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+                        <div style="flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;border:1px solid #eee">
+                            <img src="./itsm1.png" style="width:100%;height:100%;object-fit:cover;margin-top:0;border:none;border-radius:0">
+                        </div>
+                        <p style="text-align:center">图1</p>
+                    </div>
+                    <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+                        <div style="flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;border:1px solid #eee">
+                            <img src="./itsm2.png" style="width:100%;height:100%;object-fit:cover;margin-top:0;border:none;border-radius:0">
+                        </div>
+                        <p style="text-align:center">图2</p>
+                    </div>
+                    <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+                        <div style="flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;border:1px solid #eee">
+                            <img src="./itsm3.png" style="width:100%;height:100%;object-fit:cover;margin-top:0;border:none;border-radius:0">
+                        </div>
+                        <p style="text-align:center">图3</p>
+                    </div>
                 </div>
 
             </div>
 
             <!-- PPG -->
-            <div class="compact-card">
+            <div class="compact-card" id="ppg">
                 <h4>PPG - 机场酒店业务数据状态与信息聚合管理</h4>
                 <div>
                     <span class="tag">数据治理</span>
@@ -272,11 +309,23 @@
                     • <strong>审批评论实时聚合</strong>：将分散在不同渠道的Approve/Reject/Return/Submit评论统一沉淀至Power App
                     Timeline，构建完整业务操作审计链，提升协作透明度<br>
                     • <strong>到期预警与置顶</strong>：基于业务时效性要求，自动识别Master Data关键节点，未到期前置顶Timeline最上方，到期自动移除，降低业务遗漏风险<br>
-                    • <strong>层级权限级联策略</strong>：针对机场-酒店多层级团队协作场景，设计权限继承规则——子级team被分享时父级自动同步（满足管理审计透明性），父级单独分享时子级不自动暴露（遵循最小权限原则）。通过Power Automate条件分支实现层级标签驱动的差异化权限传播，平衡业务可见性与数据安全合规。
+                    •
+                    <strong>层级权限级联策略</strong>：针对机场-酒店多层级团队协作场景，设计权限继承规则——子级team被分享时父级自动同步（满足管理审计透明性），父级单独分享时子级不自动暴露（遵循最小权限原则）。通过Power
+                    Automate条件分支实现层级标签驱动的差异化权限传播，平衡业务可见性与数据安全合规。
                 </p>
-                <div style="display:flex;gap:12px;margin-top:12px">
-                    <img src="./ppg1.png" style="flex:1;min-width:0">    
-                    <img src="./ppg2.png" style="flex:1;min-width:0">
+                <div style="display:flex;gap:12px;margin-top:12px;align-items:stretch">
+                    <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+                        <div style="flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;border:1px solid #eee">
+                            <img src="./ppg1.png" style="width:100%;height:100%;object-fit:cover;margin-top:0;border:none;border-radius:0">
+                        </div>
+                        <p style="text-align:center">图1</p>
+                    </div>
+                    <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+                        <div style="flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;border:1px solid #eee">
+                            <img src="./ppg2.png" style="width:100%;height:100%;object-fit:cover;margin-top:0;border:none;border-radius:0">
+                        </div>
+                        <p style="text-align:center">图2</p>
+                    </div>
                 </div>
 
             </div>

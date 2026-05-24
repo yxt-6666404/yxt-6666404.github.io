@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食汇 - 美食社区产品从0到1实践</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f5f6f7;
+            color: #333;
+            line-height: 1.8;
+            padding: 16px
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06)
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px
+        }
+
+        .badge.blue {
+            background: #e3f2fd;
+            color: #1565c0
+        }
+
+        .badge.orange {
+            background: #fff3e0;
+            color: #e65100
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 8px
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px
+        }
+
+        .section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #f0f0f0
+        }
+
+        .section h2 {
+            font-size: 20px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .section h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #d97757;
+            border-radius: 2px
+        }
+
+        .section p {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 12px;
+            line-height: 1.8
+        }
+
+        .highlight {
+            color: #d97757;
+            font-weight: 700
+        }
+
+        .img-card {
+            background: #fafbfc;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+            border: 1px solid #ececec;
+            text-align: center
+        }
+
+        .img-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0
+        }
+
+        .img-caption {
+            color: #888;
+            font-size: 13px;
+            margin-top: 10px;
+            font-style: italic
+        }
+
+        .img-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #999;
+            margin: 16px 0
+        }
+
+        .img-placeholder .ph-icon {
+            font-size: 32px;
+            margin-bottom: 8px
+        }
+
+        .img-placeholder .ph-text {
+            font-size: 14px
+        }
+
+        .img-placeholder .ph-desc {
+            font-size: 12px;
+            color: #bbb;
+            margin-top: 6px
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 16px 0
+        }
+
+        .data-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center
+        }
+
+        .data-num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #d97757
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px
+        }
+
+        .tag {
+            display: inline-block;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            margin: 0 6px 8px 0;
+            font-weight: 500
+        }
+
+        .tag.blue {
+            background: #e3f2fd;
+            color: #1565c0
+        }
+
+        .tag.green {
+            background: #e8f5e9;
+            color: #2e7d32
+        }
+
+        .tag.purple {
+            background: #f3e5f5;
+            color: #7b1fa2
+        }
+
+        .flow-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 18px;
+            margin: 12px 0
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px
+        }
+
+        .flow-step:last-child {
+            margin-bottom: 0
+        }
+
+        .step-num {
+            background: #d97757;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0
+        }
+
+        .step-text {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6
+        }
+
+        .quote-box {
+            background: #fff8e1;
+            border-left: 3px solid #ffc107;
+            padding: 14px 16px;
+            margin: 14px 0;
+            font-size: 14px;
+            color: #5d4037;
+            border-radius: 0 8px 8px 0
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 16px 0
+        }
+
+        .role-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 14px
+        }
+
+        .role-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px
+        }
+
+        .role-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5
+        }
+
+        .module-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 14px 0
+        }
+
+        .module-item {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            padding: 12px
+        }
+
+        .module-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px
+        }
+
+        .module-desc {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.4
+        }
+
+        .algo-box {
+            background: #f5f7ff;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 14px 0;
+            border-left: 3px solid #6366f1
+        }
+
+        .algo-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4338ca;
+            margin-bottom: 8px
+        }
+
+        .algo-formula {
+            font-family: "Courier New", monospace;
+            background: #fff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #333;
+            margin: 8px 0;
+            overflow-x: auto
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+            margin: 16px 0
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 4px;
+            bottom: 4px;
+            width: 2px;
+            background: #e0e0e0
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 18px
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: -20px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d97757;
+            border: 2px solid #fff
+        }
+
+        .tl-date {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 2px
+        }
+
+        .tl-text {
+            font-size: 14px;
+            color: #555
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #666;
+            font-size: 14px;
+            text-decoration: none;
+            margin-bottom: 16px;
+            transition: color 0.2s
+        }
+
+        .back-link:hover {
+            color: #d97757
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px
+        }
+
+        .back-bar {
+            padding: 16px 0 0
+        }
+
+        .back-bar a {
+            color: #D97757;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500
+        }
+
+        .header {
+            padding-top: 16px
+        }
+
+        .footer {
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 13px;
+            text-align: center
+        }
+
+        @media(max-width:480px) {
+            .data-grid {
+                grid-template-columns: 1fr
+            }
+
+            .role-grid {
+                grid-template-columns: 1fr
+            }
+
+            .module-list {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+    <base target="_blank">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 返回上一页 -->
+        <div class="back-bar">
+            <a href="javascript:history.back()">← 返回上一页</a>
+        </div>
+
+        <!-- 顶部 -->
+        <div class="header">
+            <span class="badge">校园项目 · 从0到1</span>
+            <h1>美食汇</h1>
+            <p class="subtitle">融合工具+社区+电商属性的美食食谱平台 · PRD驱动的产品设计实践</p>
+        </div>
+
+        <!-- 项目概览 -->
+        <div class="section">
+            <h2>项目概览与我的角色</h2>
+            <p>「美食汇」是一款面向年轻群体的美食食谱应用，定位为<strong>"家庭美食入口"</strong>，融合工具（菜谱查询）、社区（UGC分享）与电商（食材购买）三大属性。项目从需求分析到PRD输出，完整经历产品从0到1的设计流程。
+            </p>
+
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-num">4</div>
+                    <div class="data-label">核心模块（首页/社区/清单/我的）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">12+</div>
+                    <div class="data-label">功能点详细设计</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-num">2</div>
+                    <div class="data-label">版本迭代（Beta 1.0.1→1.0.2）</div>
+                </div>
+            </div>
+
+            <div class="role-grid">
+                <div class="role-item">
+                    <div class="role-title">👤 我的角色</div>
+                    <div class="role-desc">产品经理（双人小组），负责需求分析、功能规划、PRD撰写、原型设计</div>
+                </div>
+                <div class="role-item">
+                    <div class="role-title">🎯 核心目标</div>
+                    <div class="role-desc">解决年轻人"想做菜但不会做"的痛点，降低烹饪学习门槛</div>
+                </div>
+                <div class="role-item">
+                    <div class="role-title">⏱️ 项目周期</div>
+                    <div class="role-desc">2023年9月-12月，约3个月（含2轮测试迭代）</div>
+                </div>
+                <div class="role-item">
+                    <div class="role-title">🛠️ 使用工具</div>
+                    <div class="role-desc">Axure原型、PRD文档、流程图、竞品分析</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 需求洞察 -->
+        <div class="section">
+            <h2>需求洞察：为什么做美食汇？</h2>
+            <p>通过用户调研和场景分析，发现三个核心痛点：</p>
+            <p>• <strong>外卖焦虑</strong>：预制菜、价格、卫生问题促使年轻人回归厨房，但缺乏系统的烹饪学习路径<br>
+                • <strong>信息碎片化</strong>：现有菜谱App多为纯工具属性，缺少社交激励和购物闭环<br>
+                • <strong>创作门槛高</strong>：用户想分享自制美食，但缺乏低成本的UGC发布和积分激励机制</p>
+
+            <div class="quote-box">
+                <strong>产品定位决策</strong>：不做纯工具型菜谱App，而是打造"工具+社区+电商"三位一体的家庭美食入口，通过社交关系链和内容推荐算法提升用户留存。
+            </div>
+        </div>
+
+        <!-- 产品架构 -->
+        <div class="section">
+            <h2>产品架构设计</h2>
+            <p>采用<strong>"4+12"模块化架构</strong>：4个一级Tab承载核心场景，12个功能模块覆盖完整用户旅程。</p>
+
+            <div class="module-list">
+                <div class="module-item">
+                    <div class="module-name">🏠 首页</div>
+                    <div class="module-desc">搜索+轮播图+必读干货+菜谱分类+猜你喜欢（推荐算法）</div>
+                </div>
+                <div class="module-item">
+                    <div class="module-name">👥 社区</div>
+                    <div class="module-desc">发现页（UGC推荐）+关注流+消息提醒+用户推荐</div>
+                </div>
+                <div class="module-item">
+                    <div class="module-name">📝 清单</div>
+                    <div class="module-desc">当前清单+历史清单+购物清单+创建食谱</div>
+                </div>
+                <div class="module-item">
+                    <div class="module-name">👤 我的</div>
+                    <div class="module-desc">烹饪书+食谱+收藏+会员体系+设置</div>
+                </div>
+            </div>
+
+            <!-- 产品功能结构图 -->
+            <div class="img-card">
+                <img src="./美食汇/图片1.png" alt="产品功能结构图">
+                <div class="img-caption">产品功能结构图</div>
+            </div>
+
+            <!-- 产品信息结构图 -->
+            <div class="img-card">
+                <img src="./美食汇/图片2.png" alt="产品信息结构图">
+                <div class="img-caption">产品信息结构图</div>
+            </div>
+        </div>
+
+        <!-- 核心功能设计 -->
+        <div class="section">
+            <h2>核心功能设计亮点</h2>
+
+            <h3 style="font-size:16px;color:#333;margin:16px 0 10px">1. 首页推荐算法（热度+协同过滤）</h3>
+            <p>设计三层推荐策略，解决新用户冷启动和老用户个性化问题：</p>
+
+            <div class="algo-box">
+                <div class="algo-title">🔥 Hotness 热度算法</div>
+                <div class="algo-formula">热度1 = w₁×点赞数 + w₂×评论数 + w₃×分享数<br>
+                    热度2 = log(浏览量)<br>
+                    热度3 = 热度1 / 时间衰减因子<br>
+                    <strong>总热度 = (热度1 + 热度2 + 热度3) / 2</strong>
+                </div>
+                <p style="font-size:13px;color:#666;margin-top:8px">引入对数函数防止浏览量过大导致热度值失真，时间衰减因子保证内容时效性</p>
+            </div>
+
+            <div class="algo-box">
+                <div class="algo-title">🤝 协同过滤推荐</div>
+                <p style="font-size:13px;color:#555">基于用户相似度（兴趣标签、互动行为）推荐"和你口味相似的人喜欢的内容"，结合热度算法实现个性化+热门双重保障。</p>
+            </div>
+
+            <!-- 首页原型 -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/1.png" alt="首页原型1">
+                    <div class="img-caption">首页1</div>
+                </div>
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/2.png" alt="首页原型2">
+                    <div class="img-caption">首页2</div>
+                </div>
+            </div>
+
+            <h3 style="font-size:16px;color:#333;margin:24px 0 10px">2. 社区UGC与积分激励体系</h3>
+            <p>设计<strong>"创作-积分-会员"</strong>闭环激励：</p>
+            <p>• 发布食谱 → 获得2积分<br>
+                • 积分累计达1000 → 兑换1日会员体验<br>
+                • 会员解锁AI菜谱咨询（食材替换、用量调节）<br>
+                • 年费会员赠送1个月，提升LTV</p>
+
+            <!-- 社区/积分相关原型 -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/4.png" alt="社区发现页">
+                    <div class="img-caption">社区发现页 - UGC内容流</div>
+                </div>
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/3.png" alt="会员体系">
+                    <div class="img-caption">会员体系 - 烹饪书与积分</div>
+                </div>
+            </div>
+
+            <h3 style="font-size:16px;color:#333;margin:24px 0 10px">3. 清单管理：从食谱到购物闭环</h3>
+            <p>设计<strong>"食谱→食材清单→购物"</strong>的完整链路：</p>
+            <div class="flow-box">
+                <div class="flow-step">
+                    <span class="step-num">1</span>
+                    <span class="step-text"><strong>创建食谱</strong>：填写名称、时长、难度、食材用量（支持拍照识别）</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">2</span>
+                    <span class="step-text"><strong>生成清单</strong>：自动提取食材生成购物清单，支持勾选管理</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">3</span>
+                    <span class="step-text"><strong>历史归档</strong>：已完成清单自动归档，支持复用和分享</span>
+                </div>
+            </div>
+
+            <!-- 清单流程原型 -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/5.png" alt="当前清单">
+                    <div class="img-caption">当前清单 - 食谱管理</div>
+                </div>
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/8.png" alt="购物清单">
+                    <div class="img-caption">购物清单 - 食材采购</div>
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/6.png" alt="创建食谱">
+                    <div class="img-caption">创建食谱 - 信息填写</div>
+                </div>
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/7.png" alt="创建食谱详情">
+                    <div class="img-caption">创建食谱 - 食材添加</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 流程设计 -->
+        <div class="section">
+            <h2>关键流程设计</h2>
+            <p>绘制6大核心流程图，覆盖用户从进入到转化的完整旅程：</p>
+            <div style="margin:10px 0">
+                <span class="tag">登录/注册</span>
+                <span class="tag blue">忘记密码</span>
+                <span class="tag green">创建食谱</span>
+                <span class="tag purple">添加食材</span>
+            </div>
+
+            <!-- 核心流程图 -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/9.png" alt="核心流程图1">
+                    <div class="img-caption">创建食谱流程</div>
+                </div>
+                <div class="img-card" style="margin:0">
+                    <img src="./美食汇/10.png" alt="核心流程图2">
+                    <div class="img-caption">登录/注册流程</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 迭代与数据 -->
+        <div class="section">
+            <h2>版本迭代与数据验证</h2>
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-date">2023年9月-10月</div>
+                    <div class="tl-text"><strong>V1.0.1 基础功能版</strong>：完成核心菜谱查询、社区浏览、清单管理</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-date">2023年11月-12月</div>
+                    <div class="tl-text"><strong>V1.0.2 商业闭环版</strong>：新增会员体系、AI功能、积分激励、推荐算法优化</div>
+                </div>
+            </div>
+
+            <p><strong>关键迭代决策：</strong></p>
+            <p>• <strong>商业化验证</strong>：V1.0.2新增会员充值（30元/月）和AI菜谱咨询，验证用户付费意愿<br>
+                • <strong>内容生态</strong>：增加积分激励和合伙人认证机制，解决UGC冷启动问题<br>
+                • <strong>推荐优化</strong>：从纯热门排序升级为"协同过滤+热度"双引擎，提升内容分发效率</p>
+
+            <div class="quote-box">
+                <strong>数据点</strong>：虽然校园项目无真实线上数据，但在测试阶段收集了20+位目标用户的反馈，其中<strong>85%认为"购物清单"功能解决了"做菜时漏买食材"的痛点</strong>，<strong>70%对AI用量调节功能表示兴趣</strong>。
+            </div>
+        </div>
+
+        <!-- 技术理解 -->
+        <div class="section">
+            <h2>技术理解与协作</h2>
+            <p>作为产品经理，在PRD中明确技术约束和实现方案，降低与开发团队的沟通成本：</p>
+
+            <p>• <strong>安全需求</strong>：用户个人信息接口层加密传输，全站HTTPS<br>
+                • <strong>性能需求</strong>：启动到首页≤5秒，单页加载≤3秒，超时提示+重载机制<br>
+                • <strong>适配策略</strong>：iOS遵循人机交互规范，Android遵循MaterialDesign，支持主流机型<br>
+                • <strong>缓存机制</strong>：信息加载完成后支持离线浏览，提升弱网体验</p>
+
+            <div class="quote-box">
+                <strong>非功能性需求设计</strong>：在PRD中独立成章（第7章），涵盖安全、性能、可用性、升级维护四个维度，体现对技术落地的深度思考。
+            </div>
+        </div>
+
+        <!-- 我的收获 -->
+        <div class="section">
+            <h2>项目收获与能力沉淀</h2>
+            <div class="flow-box">
+                <div class="flow-step">
+                    <span class="step-num">1</span>
+                    <span class="step-text"><strong>PRD规范化写作</strong>：掌握从背景→角色→约束→结构→流程→功能→非功能需求的完整PRD框架，输出50+页文档</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">2</span>
+                    <span
+                        class="step-text"><strong>算法产品设计</strong>：将推荐算法（热度/协同过滤）转化为可落地的PRD描述，理解"算法策略→界面呈现→数据反馈"的闭环</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">3</span>
+                    <span class="step-text"><strong>商业化思维</strong>：设计会员+积分双激励体系，思考产品长期收益而非单次功能交付</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">4</span>
+                    <span class="step-text"><strong>跨团队协作</strong>：与开发、测试、设计团队进行需求评审，学习用"用户故事+验收标准"对齐各方认知</span>
+                </div>
+            </div>
+        </div>
+
+    
+
+        <div class="footer">
+            美食汇项目 · 2023年校园产品实践 · PRD驱动的从0到1设计
+        </div>
+    </div>
+</body>
+
+</html>

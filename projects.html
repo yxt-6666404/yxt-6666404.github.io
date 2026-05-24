@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目集 - 叶杏涛 | 作品集</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #1A1F2E;
+            --color-accent: #00D4AA;
+            --color-highlight: #FFB800;
+            --color-bg-light: #F5F7FA;
+            --color-text: #0D1117;
+            --color-text-secondary: #6B7280;
+            --font-heading: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg-light);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 导航 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 31, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-logo span {
+            color: var(--color-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--color-primary);
+            padding: 140px 48px 80px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-heading);
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            color: rgba(255,255,255,0.5);
+            font-size: 18px;
+        }
+
+        .project-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding: 8px 20px;
+            background: rgba(0,212,170,0.1);
+            border: 1px solid rgba(0,212,170,0.2);
+            border-radius: 100px;
+            color: var(--color-accent);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: #fff;
+            padding: 24px 48px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            position: sticky;
+            top: 64px;
+            z-index: 100;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid rgba(0,0,0,0.08);
+            background: #fff;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .filter-btn.active {
+            background: var(--color-accent);
+            color: var(--color-primary);
+            border-color: var(--color-accent);
+        }
+
+        /* Projects Grid */
+        .projects-section {
+            padding: 60px 48px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .project-card.hidden {
+            display: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .project-card-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-primary), #2a3550);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,212,170,0.1), transparent);
+        }
+
+        .project-icon {
+            font-size: 56px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-type-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            padding: 6px 14px;
+            background: var(--color-accent);
+            color: var(--color-primary);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 100px;
+            z-index: 1;
+        }
+
+        .project-card-content {
+            padding: 28px;
+        }
+
+        .project-card-role {
+            font-size: 12px;
+            color: var(--color-accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .project-card-title {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 10px;
+        }
+
+        .project-card-desc {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .project-card-stats {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .project-stat {
+            font-size: 13px;
+            color: var(--color-accent);
+            font-weight: 600;
+            background: rgba(0,212,170,0.08);
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        .project-tech-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .project-tech-tag {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            background: var(--color-bg-light);
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        /* No results */
+        .no-results {
+            text-align: center;
+            padding: 80px 24px;
+            color: var(--color-text-secondary);
+            font-size: 16px;
+            display: none;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-primary);
+            padding: 40px 48px;
+            text-align: center;
+        }
+
+        .footer p {
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .page-header {
+                padding: 120px 24px 60px;
+            }
+
+            .page-header h1 {
+                font-size: 36px;
+            }
+
+            .filter-section {
+                padding: 16px 24px;
+                top: 56px;
+            }
+
+            .projects-section {
+                padding: 40px 24px 60px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">叶杏涛<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于我</a></li>
+            <li><a href="projects.html" class="active">项目集</a></li>
+            <li><a href="experience.html">经历</a></li>
+            <li><a href="contact.html">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>项目集</h1>
+        <div class="project-count">
+            <span>📦</span>
+            <span>6 个AI原生产品的完整实践</span>
+        </div>
+    </header>
+
+
+
+    <!-- Projects Grid -->
+    <section class="projects-section">
+        <div class="projects-grid" id="projects-grid">
+            <!-- 渐成画迹 -->
+            <a href="./habit/习惯.html" class="project-card" data-category="c端 ai-native">
+                <div class="project-card-image">
+                    <span class="project-type-badge">C端应用. Vibe Coding</span>
+                    <span class="project-icon">🎯</span>
+                </div>
+                <div class="project-card-content">
+                    <div class="project-card-role">产品负责人</div>
+                    <h3 class="project-card-title">渐成画迹</h3>
+                    <p class="project-card-desc">微习惯追踪App，AI-Native独立产品。基于Trae AI IDE践行Vibe Coding范式，2.5周完成MVP交付。</p>
+                    <div class="project-card-stats">
+                        <span class="project-stat">满意度 4.6/5</span>
+                        <span class="project-stat">痛点解决率 100%</span>
+                        <span class="project-stat">98.4%测试通过</span>
+                    </div>
+                    <div class="project-tech-tags">
+                        <span class="project-tech-tag">Trae</span>
+                        <span class="project-tech-tag">Vibe Coding</span>
+                        <span class="project-tech-tag">Figma</span>
+                        <span class="project-tech-tag">HTML</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- AI刺绣定制平台 -->
+            <a href="./embroidery/刺绣.html" class="project-card" data-category="ai-native b端">
+                <div class="project-card-image">
+                    <span class="project-type-badge">Multi-Agent</span>
+                    <span class="project-icon">🧵</span>
+                </div>
+                <div class="project-card-content">
+                    <div class="project-card-role">产品负责人</div>
+                    <h3 class="project-card-title">AI刺绣定制平台</h3>
+                    <p class="project-card-desc">基于Agent-Flow架构的非遗定制平台。Multi_Agent-Flow串联，从需求解析到图案生成到匠人匹配全自动化。</p>
+                    <div class="project-card-stats">
+                        <span class="project-stat">85%测试通过</span>
+                        <span class="project-stat">0.04元/次</span>
+                        <span class="project-stat">6维度评分</span>
+                    </div>
+                    <div class="project-tech-tags">
+                        <span class="project-tech-tag">Agent-Flow</span>
+                        <span class="project-tech-tag">Coze</span>
+                        <span class="project-tech-tag">Prompt工程</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 字里藏画 -->
+            <a href="./painting/画.html" class="project-card" data-category="ai-native 个人项目">
+                <div class="project-card-image">
+                    <span class="project-type-badge">AI工具</span>
+                    <span class="project-icon">🎨</span>
+                </div>
+                <div class="project-card-content">
+                    <div class="project-card-role">产品负责人</div>
+                    <h3 class="project-card-title">字里藏画</h3>
+                    <p class="project-card-desc">AI文生图创意工具，解决风格复刻与隐私问题。3天MVP验证，独立网页验证→API中台接入两阶段策略。</p>
+                    <div class="project-card-stats">
+                        <span class="project-stat">3天MVP</span>
+                        <span class="project-stat">风格复刻</span>
+                        <span class="project-stat">API中台</span>
+                    </div>
+                    <div class="project-tech-tags">
+                        <span class="project-tech-tag">Coze</span>
+                        <span class="project-tech-tag">API</span>
+                        <span class="project-tech-tag">文生图</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- AI模型日报 -->
+            <a href="./aimodel/模型.html" class="project-card" data-category="ai-native 个人项目">
+                <div class="project-card-image">
+                    <span class="project-type-badge">数据产品</span>
+                    <span class="project-icon">📊</span>
+                </div>
+                <div class="project-card-content">
+                    <div class="project-card-role">产品负责人</div>
+                    <h3 class="project-card-title">AI模型日报</h3>
+                    <p class="project-card-desc">AI模型选型辅助工具，五维评估框架+11场景排名规则。2周内0-1落地，覆盖20+公司40+模型。</p>
+                    <div class="project-card-stats">
+                        <span class="project-stat">40+模型</span>
+                        <span class="project-stat">11场景</span>
+                        <span class="project-stat">五维评估</span>
+                    </div>
+                    <div class="project-tech-tags">
+                        <span class="project-tech-tag">数据分析</span>
+                        <span class="project-tech-tag">量化评分</span>
+                        <span class="project-tech-tag">场景化</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 刺绣智汇平台 -->
+            <div class="project-card" data-category="毕业设计 b端" style="cursor: default;">
+                <div class="project-card-image">
+                    <span class="project-type-badge">毕业设计</span>
+                    <span class="project-icon">🏛️</span>
+                </div>
+                <div class="project-card-content">
+                    <div class="project-card-role">个人项目</div>
+                    <h3 class="project-card-title">刺绣智汇平台</h3>
+                    <p class="project-card-desc">B2B2C多端协同平台，解决非遗刺绣定制化门槛高、供需匹配效率低痛点。5类角色全链路数字化管理。</p>
+                    <div class="project-card-stats">
+                        <span class="project-stat">多端协同</span>
+                        <span class="project-stat">ERP管理</span>
+                        <span class="project-stat">文生图技术</span>
+                    </div>
+                    <div class="project-tech-tags">
+                        <span class="project-tech-tag">B2B2C</span>
+                        <span class="project-tech-tag">ERP</span>
+                        <span class="project-tech-tag">文生图</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 美食汇 -->
+            <a href="project-meishi.html" class="project-card" data-category="c端 个人项目">
+                <div class="project-card-image">
+                    <span class="project-type-badge">C端应用</span>
+                    <span class="project-icon">🍜</span>
+                </div>
+                <div class="project-card-content">
+                    <div class="project-card-role">个人项目</div>
+                    <h3 class="project-card-title">美食汇</h3>
+                    <p class="project-card-desc">美食类APP产品设计，完成PRD文档、产品结构及非功能性需求描述。运用亿图脑图梳理功能与信息结构。</p>
+                    <div class="project-card-stats">
+                        <span class="project-stat">课程优秀</span>
+                        <span class="project-stat">4大模块</span>
+                        <span class="project-stat">ProcessOn</span>
+                    </div>
+                    <div class="project-tech-tags">
+                        <span class="project-tech-tag">Axure</span>
+                        <span class="project-tech-tag">ProcessOn</span>
+                        <span class="project-tech-tag">PRD</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="no-results" id="no-results">
+            <p>该分类下暂无项目，请选择其他分类查看</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 叶杏涛 · 作品集</p>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        const noResults = document.getElementById('no-results');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                let visibleCount = 0;
+
+                projectCards.forEach(card => {
+                    const categories = card.dataset.category.split(' ');
+                    
+                    if (filter === 'all' || categories.includes(filter)) {
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                        
+                        // Add animation
+                        card.style.animation = 'none';
+                        setTimeout(() => {
+                            card.style.animation = 'fadeInUp 0.5s ease forwards';
+                        }, 10);
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                // Show/hide no results message
+                if (visibleCount === 0) {
+                    noResults.classList.add('show');
+                } else {
+                    noResults.classList.remove('show');
+                }
+            });
+        });
+
+        // Animate cards on scroll
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        projectCards.forEach(card => {
+            cardObserver.observe(card);
+        });
+    </script>
+</body>
+</html>

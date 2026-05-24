@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经历 - 叶杏涛 | 作品集</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #1A1F2E;
+            --color-accent: #00D4AA;
+            --color-highlight: #FFB800;
+            --color-bg-light: #F5F7FA;
+            --color-text: #0D1117;
+            --color-text-secondary: #6B7280;
+            --font-heading: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg-light);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 导航 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 31, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-logo span {
+            color: var(--color-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--color-primary);
+            padding: 140px 48px 80px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-heading);
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            color: rgba(255,255,255,0.5);
+            font-size: 18px;
+        }
+
+        /* Work Experience Section */
+        .work-section {
+            padding: 100px 48px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .work-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .work-card:hover {
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+
+        .work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .work-company {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .work-role {
+            font-size: 16px;
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .work-period {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            background: var(--color-bg-light);
+            padding: 6px 14px;
+            border-radius: 100px;
+        }
+
+        .work-projects {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .work-project {
+            padding: 20px;
+            background: var(--color-bg-light);
+            border-radius: 12px;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .work-project-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+
+        .work-project-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .work-project-stats {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .work-stat {
+            font-size: 13px;
+            color: var(--color-accent);
+            font-weight: 600;
+            background: rgba(0,212,170,0.08);
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        /* Education Section */
+        .education-section {
+            background: #fff;
+            padding: 100px 48px;
+        }
+
+        .education-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .education-card {
+            background: var(--color-bg-light);
+            border-radius: 16px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .education-main h3 {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+
+        .education-major {
+            font-size: 16px;
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .education-period {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .education-gpa {
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid rgba(0,212,170,0.2);
+        }
+
+        .education-gpa-label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .education-gpa-value {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .education-details h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 16px;
+        }
+
+        .education-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .education-list li {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .education-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-accent);
+        }
+
+        /* Awards Section */
+        .awards-section {
+            padding: 100px 48px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .award-card {
+            background: #fff;
+            padding: 32px 24px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .award-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+
+        .award-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .award-title {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+
+        .award-year {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        /* Certifications */
+        .cert-section {
+            background: #fff;
+            padding: 100px 48px;
+        }
+
+        .cert-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .cert-card {
+            background: var(--color-bg-light);
+            padding: 32px 24px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            background: var(--color-primary);
+        }
+
+        .cert-card:hover .cert-name {
+            color: #fff;
+        }
+
+        .cert-card:hover .cert-issuer {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .cert-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--color-accent), #00A8E8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 16px;
+        }
+
+        .cert-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .cert-issuer {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-primary);
+            padding: 40px 48px;
+            text-align: center;
+        }
+
+        .footer p {
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .education-card {
+                grid-template-columns: 1fr;
+            }
+
+            .awards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cert-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .page-header {
+                padding: 120px 24px 60px;
+            }
+
+            .page-header h1 {
+                font-size: 36px;
+            }
+
+            .work-section,
+            .education-section,
+            .awards-section,
+            .cert-section {
+                padding: 60px 24px;
+            }
+
+            .work-card {
+                padding: 24px;
+            }
+
+            .awards-grid,
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">叶杏涛<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于我</a></li>
+            <li><a href="projects.html">项目集</a></li>
+            <li><a href="experience.html" class="active">经历</a></li>
+            <li><a href="contact.html">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>工作经历</h1>
+        <p>企业级项目实践与持续学习成长</p>
+    </header>
+
+    <!-- Work Experience Section -->
+    <section class="work-section">
+        <div class="work-card">
+            <div class="work-header">
+                <div>
+                    <div class="work-company">广州奔步电脑有限公司</div>
+                    <div class="work-role">初级软件工程师</div>
+                </div>
+                <div class="work-period">2024.09 - 2025.12</div>
+            </div>
+            <div class="work-projects">
+                <a href="bupa/奔步.html#bupa" class="work-project" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="work-project-title">BUPA保险业务流程自动化</div>
+                    <div class="work-project-desc">企业级保险核心业务系统重构，实现业务流程自动化处理</div>
+                    <div class="work-project-stats">
+                        <span class="work-stat">2个月交付</span>
+                        <span class="work-stat">日处理200+Case</span>
+                        <span class="work-stat">准确率99%+</span>
+                    </div>
+                </a>
+                <a href="bupa/奔步.html#power-approval" class="work-project" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="work-project-title">Power Approval审批引擎优化</div>
+                    <div class="work-project-desc">设计一键撤销功能，优化审批流程用户体验</div>
+                    <div class="work-project-stats">
+                        <span class="work-stat">一键撤销</span>
+                        <span class="work-stat">流程优化</span>
+                    </div>
+                </a>
+                <a href="bupa/奔步.html#itsm" class="work-project" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="work-project-title">ITSM服务管理升级</div>
+                    <div class="work-project-desc">双通道审批架构设计，大幅提升入驻效率</div>
+                    <div class="work-project-stats">
+                        <span class="work-stat">双通道架构</span>
+                        <span class="work-stat">效率提升6倍</span>
+                    </div>
+                </a>
+                <a href="bupa/奔步.html#ppg" class="work-project" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="work-project-title">PPG机场酒店协同平台</div>
+                    <div class="work-project-desc">实现数据100%可追溯，提升业务透明度</div>
+                    <div class="work-project-stats">
+                        <span class="work-stat">100%可追溯</span>
+                        <span class="work-stat">数据透明</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section">
+        <div class="education-container">
+            <h2 class="section-title">教育背景</h2>
+            <div class="education-card">
+                <div class="education-main">
+                    <h3>浙江理工大学</h3>
+                    <div class="education-major">信息管理与信息系统</div>
+                    <div class="education-period">2021.09 - 2025.06</div>
+                    <div class="education-gpa">
+                        <div class="education-gpa-label">GPA 成绩</div>
+                        <div class="education-gpa-value">3.6 / 5.0（前10%）</div>
+                    </div>
+                </div>
+                <div class="education-details">
+                    <h4>主修课程</h4>
+                    <ul class="education-list">
+                        <li>数据库原理与应用</li>
+                        <li>面向对象程序设计</li>
+                        <li>Web系统开发与设计</li>
+                        <li>管理统计与软件应用</li>
+                        <li>移动开发技术</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="awards-section">
+        <h2 class="section-title">获奖荣誉</h2>
+        <div class="awards-grid">
+            <div class="award-card">
+                <div class="award-icon">🏆</div>
+                <div class="award-title">挑战杯创业计划竞赛</div>
+                <div class="award-year">三等奖 · 2022</div>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">🥉</div>
+                <div class="award-title">电子商务大赛</div>
+                <div class="award-year">三等奖 · 2023</div>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">🎓</div>
+                <div class="award-title">二等奖学金</div>
+                <div class="award-year">学业优秀 · 2024</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="cert-section">
+        <div class="cert-container">
+            <h2 class="section-title">认证与技能</h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">🏅</div>
+                    <div class="cert-name">Power Platform</div>
+                    <div class="cert-issuer">Microsoft</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">📜</div>
+                    <div class="cert-name">PL-900</div>
+                    <div class="cert-issuer">Microsoft Certified</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">💻</div>
+                    <div class="cert-name">前端开发</div>
+                    <div class="cert-issuer">Vue / React / TS</div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🤖</div>
+                    <div class="cert-name">AI工具</div>
+                    <div class="cert-issuer">Coze / Trae / Kimi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 叶杏涛 · 作品集</p>
+    </footer>
+
+    <script>
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.work-card, .education-card, .award-card, .cert-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

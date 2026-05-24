@@ -3,407 +3,1225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>叶杏涛 - IT BA / 产品方向</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>叶杏涛 - AI-Native × 产品全链路</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --color-primary: #1A1F2E;
+            --color-accent: #00D4AA;
+            --color-highlight: #FFB800;
+            --color-bg-light: #F5F7FA;
+            --color-text: #0D1117;
+            --color-text-secondary: #6B7280;
+            --font-heading: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
-            overflow: hidden;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0f0f0f;
-            color: #e8e8e8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: var(--font-body);
+            background: var(--color-primary);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
 
-        .page {
-            width: 100%;
-            height: 100%;
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 导航 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 48px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 40px 24px;
+            background: rgba(26, 31, 46, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-logo span {
+            color: var(--color-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
             position: relative;
         }
 
-        /* 背景装饰 */
-        .bg-grid {
-            position: fixed;
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 120px 48px 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg-grid {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image:
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
+                linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
             pointer-events: none;
-            z-index: 0;
         }
 
-        .bg-glow {
-            position: fixed;
-            width: 500px;
-            height: 500px;
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.15;
+            filter: blur(150px);
+            opacity: 0.12;
             pointer-events: none;
-            z-index: 0;
         }
 
-        .bg-glow-1 {
-            top: -10%;
-            right: -5%;
-            background: #d97757;
+        .hero-glow-1 {
+            top: -20%;
+            right: -10%;
+            background: var(--color-accent);
         }
 
-        .bg-glow-2 {
-            bottom: -10%;
-            left: -5%;
-            background: #2a6ee6;
+        .hero-glow-2 {
+            bottom: -20%;
+            left: -10%;
+            background: var(--color-highlight);
         }
 
-        /* 内容区 */
-        .content {
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
             position: relative;
             z-index: 1;
-            max-width: 1100px;
-            width: 100%;
-            text-align: center;
         }
 
-        /* 头部 */
-        .header {
-            margin-bottom: 36px;
-        }
-
-        .name {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 52px;
+        .hero-text h1 {
+            font-family: var(--font-heading);
+            font-size: 48px;
             font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            white-space: nowrap;
+        }
+
+        .hero-text h1 .accent {
+            color: var(--color-accent);
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-body);
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,212,170,0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
             color: #fff;
-            letter-spacing: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .framework-flow {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .flow-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+            animation: flowMove 3s ease-in-out infinite;
+        }
+
+        @keyframes flowMove {
+            0%, 100% { opacity: 0.3; transform: translateX(-20px); }
+            50% { opacity: 1; transform: translateX(20px); }
+        }
+
+        /* Capability Matrix Section */
+        .capability-section {
+            background: var(--color-bg-light);
+            padding: 100px 48px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-text);
             margin-bottom: 12px;
         }
 
-        .role {
-            font-size: 18px;
-            color: #888;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 16px;
+        .section-header p {
+            color: var(--color-text-secondary);
+            font-size: 16px;
         }
 
-        .value-prop {
-            font-size: 15px;
-            color: #aaa;
-            line-height: 1.8;
-            max-width: 600px;
-            margin: 0 auto 20px;
-        }
-
-        .value-prop .highlight {
-            color: #d97757;
-            font-weight: 600;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .tag {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.04);
-            color: #aaa;
-            transition: all 0.3s ease;
-        }
-
-        .tag:hover {
-            border-color: rgba(217, 119, 87, 0.4);
-            color: #d97757;
-            background: rgba(217, 119, 87, 0.08);
-        }
-
-        /* 核心数据指标 */
-        .metrics {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 36px;
-        }
-
-        .metric-item {
-            text-align: center;
-        }
-
-        .metric-num {
-            font-size: 32px;
-            font-weight: 700;
-            color: #d97757;
-            line-height: 1;
-        }
-
-        .metric-label {
-            font-size: 13px;
-            color: #666;
-            margin-top: 6px;
-        }
-
-        /* 分隔线 */
-        .divider {
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #d97757, transparent);
-            margin: 0 auto 36px;
-        }
-
-        /* 项目卡片网格 */
-        .projects {
+        .capability-grid {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 16px;
-            width: 100%;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
-        .project-card {
-            position: relative;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+        .capability-card {
+            background: #fff;
             border-radius: 16px;
-            padding: 24px 16px;
-            text-decoration: none;
-            color: inherit;
+            padding: 32px;
+            border: 1px solid rgba(0,0,0,0.06);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
+            position: relative;
             overflow: hidden;
         }
 
-        .project-card::before {
+        .capability-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #d97757, #e8a88a);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            background: var(--color-accent);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .project-card:hover {
+        .capability-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(217, 119, 87, 0.3);
-            background: rgba(255,255,255,0.06);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 60px rgba(217, 119, 87, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
 
-        .project-card:hover::before {
-            opacity: 1;
+        .capability-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .project-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+        .capability-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .capability-title {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 12px;
+        }
+
+        .capability-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .capability-proof {
+            padding-top: 16px;
+            border-top: 1px dashed rgba(0,0,0,0.08);
+            font-size: 13px;
+            color: var(--color-accent);
+            font-weight: 600;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin: 0 auto 12px;
-            background: rgba(217, 119, 87, 0.1);
-            border: 1px solid rgba(217, 119, 87, 0.2);
+            gap: 6px;
         }
 
-        .project-title {
-            font-size: 15px;
-            font-weight: 600;
+        .capability-proof::before {
+            content: '→';
+            font-family: var(--font-mono);
+        }
+
+        /* AI Skills Section */
+        .ai-skills-section {
+            background: var(--color-primary);
+            padding: 100px 48px;
+        }
+
+        .ai-skills-section .section-header h2,
+        .ai-skills-section .section-header p {
             color: #fff;
-            margin-bottom: 6px;
-            line-height: 1.4;
         }
 
-        .project-desc {
-            font-size: 12px;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 10px;
+        .ai-skills-section .section-header p {
+            opacity: 0.5;
         }
 
-        .project-proof {
-            font-size: 11px;
-            color: #d97757;
-            font-weight: 500;
+        .ai-skills-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
-        .project-badge {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 3px 10px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 500;
-            background: rgba(42, 110, 230, 0.1);
-            color: #6a9bcc;
-            border: 1px solid rgba(42, 110, 230, 0.15);
+        .ai-skill-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 28px 32px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        /* 底部 */
-        .footer {
-            margin-top: 36px;
-            color: #444;
+        .ai-skill-card:hover {
+            border-color: rgba(0,212,170,0.3);
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-4px);
+        }
+
+        .ai-skill-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .ai-skill-icon {
+            font-size: 24px;
+        }
+
+        .ai-skill-name {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .ai-skill-detail {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .ai-skill-highlight {
             font-size: 13px;
-            letter-spacing: 1px;
+            color: var(--color-accent);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(255,255,255,0.08);
         }
 
-        /* 响应式 */
+        .ai-skill-highlight::before {
+            content: '→';
+            font-family: var(--font-mono);
+        }
+
         @media (max-width: 1024px) {
-            .projects {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .metrics {
-                gap: 24px;
+            .capability-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 640px) {
-            .name {
-                font-size: 36px;
-                letter-spacing: 4px;
-            }
-            .projects {
+            .capability-grid {
                 grid-template-columns: 1fr;
-                max-width: 320px;
-                margin: 0 auto;
             }
-            .page {
-                padding: 24px 16px;
-                justify-content: flex-start;
-                overflow-y: auto;
-            }
-            html, body {
-                overflow: auto;
-            }
-            .metrics {
-                flex-wrap: wrap;
-                gap: 16px;
+            .ai-skills-grid {
+                grid-template-columns: 1fr;
             }
         }
+
+        /* Metrics Section */
+        .metrics-section {
+            background: var(--color-bg-light);
+            padding: 100px 48px;
+        }
+
+        .metrics-section .section-header h2 {
+            color: var(--color-text);
+        }
+
+        .metrics-section .section-header p {
+            color: var(--color-text-secondary);
+        }
+
+        .metrics-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: rgba(0,212,170,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .metric-number {
+            font-family: var(--font-heading);
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: var(--color-text);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .metric-sublabel {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Projects Preview */
+        .projects-preview {
+            background: var(--color-primary);
+            padding: 100px 48px;
+        }
+
+        .projects-preview .section-header h2 {
+            color: #fff;
+        }
+
+        .projects-preview .section-header p {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .projects-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: rgba(0,212,170,0.2);
+        }
+
+        .project-card-image {
+            height: 180px;
+            background: linear-gradient(135deg, var(--color-primary), #2a3550);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,212,170,0.1), transparent);
+        }
+
+        .project-icon {
+            font-size: 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-type-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 12px;
+            background: var(--color-accent);
+            color: var(--color-primary);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 100px;
+            z-index: 1;
+        }
+
+        .project-card-content {
+            padding: 24px;
+        }
+
+        .project-card-title {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .project-card-desc {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .project-card-stats {
+            display: flex;
+            gap: 16px;
+        }
+
+        .project-stat {
+            font-size: 13px;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .project-card-more {
+            background: linear-gradient(135deg, var(--color-primary), #2a3550);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .project-card-more .arrow {
+            font-size: 32px;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card-more:hover .arrow {
+            transform: translateX(8px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-primary);
+            padding: 40px 48px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .footer p {
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 40px;
+            }
+
+            .hero-desc {
+                margin: 0 auto 40px;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .hero {
+                padding: 100px 24px 60px;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .tags-section,
+            .metrics-section,
+            .projects-preview {
+                padding: 60px 24px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+        }
+
+        /* Tech Stack Section */
+        .techstack-section {
+            background: var(--color-primary);
+            padding: 100px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .techstack-section .section-header h2,
+        .techstack-section .section-header p {
+            color: #fff;
+        }
+
+        .techstack-section .section-header p {
+            opacity: 0.5;
+        }
+
+        .techstack-cloud {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .techstack-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: nowrap;
+        }
+
+        .tech-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+            white-space: nowrap;
+            border: 1px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .tech-tag:hover {
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        .tech-tag-frontend {
+            background: rgba(0, 212, 170, 0.15);
+            color: #00D4AA;
+            border-color: rgba(0, 212, 170, 0.3);
+        }
+
+        .tech-tag-frontend:hover {
+            background: rgba(0, 212, 170, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.2);
+        }
+
+        .tech-tag-backend {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60A5FA;
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .tech-tag-backend:hover {
+            background: rgba(59, 130, 246, 0.25);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .tech-tag-ai {
+            background: rgba(168, 85, 247, 0.15);
+            color: #C084FC;
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .tech-tag-ai:hover {
+            background: rgba(168, 85, 247, 0.25);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.2);
+        }
+
+        .tech-tag-agent {
+            background: rgba(251, 191, 36, 0.15);
+            color: #FBBF24;
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .tech-tag-agent:hover {
+            background: rgba(251, 191, 36, 0.25);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.2);
+        }
+
+        .tech-tag-data {
+            background: rgba(244, 63, 94, 0.15);
+            color: #FB7185;
+            border-color: rgba(244, 63, 94, 0.3);
+        }
+
+        .tech-tag-data:hover {
+            background: rgba(244, 63, 94, 0.25);
+            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.2);
+        }
+
+        .tech-tag-design {
+            background: rgba(20, 184, 166, 0.15);
+            color: #2DD4BF;
+            border-color: rgba(20, 184, 166, 0.3);
+        }
+
+        .tech-tag-design:hover {
+            background: rgba(20, 184, 166, 0.25);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.2);
+        }
+
+        .tech-category-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 8px;
+        }
+
+        .tech-category-frontend {
+            background: rgba(0, 212, 170, 0.2);
+            color: #00D4AA;
+        }
+
+        .tech-category-backend {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60A5FA;
+        }
+
+        .tech-category-ai {
+            background: rgba(168, 85, 247, 0.2);
+            color: #C084FC;
+        }
+
+        .tech-category-agent {
+            background: rgba(251, 191, 36, 0.2);
+            color: #FBBF24;
+        }
+
+        .tech-category-data {
+            background: rgba(244, 63, 94, 0.2);
+            color: #FB7185;
+        }
+
+        .tech-category-design {
+            background: rgba(20, 184, 166, 0.2);
+            color: #2DD4BF;
+        }
+
+        .techstack-bg-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(180px);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .techstack-bg-glow-1 {
+            top: -30%;
+            left: -10%;
+            background: #00D4AA;
+        }
+
+        .techstack-bg-glow-2 {
+            bottom: -30%;
+            right: -10%;
+            background: #A855F7;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+        .delay-5 { animation-delay: 0.5s; opacity: 0; }
+        .delay-6 { animation-delay: 0.6s; opacity: 0; }
     </style>
 </head>
 <body>
-    <div class="bg-grid"></div>
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">叶杏涛<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">首页</a></li>
+            <li><a href="about.html">关于我</a></li>
+            <li><a href="projects.html">项目集</a></li>
+            <li><a href="experience.html">经历</a></li>
+            <li><a href="contact.html">联系</a></li>
+        </ul>
+    </nav>
 
-    <div class="page">
-        <div class="content">
-            <div class="header">
-                <h1 class="name">叶杏涛</h1>
-                <p class="role">IT BA / 产品方向 · 1年多企业级项目经验</p>
-                <p class="value-prop">
-                    从<strong class="highlight">需求洞察</strong>到<strong class="highlight">产品落地</strong>，从<strong class="highlight">流程设计</strong>到<strong class="highlight">数据验证</strong>。<br>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="animate-in delay-1">
+                    AI-Native <span class="accent">×</span> 产品全链路
+                </h1>
+                <p class="hero-subtitle animate-in delay-2">
+                    需求分析 · PRD输出 · 数据验证 · 项目落地<br/>
+                    Prompt调优 · RGA架构 · 模型评测 · 成本优化
+                </p>
+                
+                <p class="hero-desc animate-in delay-3">
+                    从需求洞察到产品落地，从流程设计到数据验证。<br/>
                     擅长将复杂业务抽象为标准化产品方案，用数据驱动决策。
                 </p>
-                <div class="tags">
-                    <span class="tag">需求分析</span>
-                    <span class="tag">PRD输出</span>
-                    <span class="tag">原型设计</span>
-                    <span class="tag">全生命周期管理</span>
-                    <span class="tag">数据驱动</span>
-                    <span class="tag">跨部门协同</span>
-                    <span class="tag">AI工具提效</span>
-                    <span class="tag">粤语流利</span>
-                    <span class="tag">CET-6</span>
+                <div class="hero-cta animate-in delay-4">
+                    <a href="projects.html" class="btn btn-primary">查看项目集</a>
+                    <a href="about.html" class="btn btn-outline">了解更多</a>
                 </div>
             </div>
-
-            <div class="metrics">
-                <div class="metric-item">
-                    <div class="metric-num">5+</div>
-                    <div class="metric-label">完整项目</div>
+            <div class="hero-visual">
+                <div class="framework-flow">
+                    <div class="flow-line" style="top: 20%; width: 60%; left: 20%;"></div>
+                    <div class="flow-line" style="top: 40%; width: 80%; left: 10%; animation-delay: 0.5s;"></div>
+                    <div class="flow-line" style="top: 60%; width: 50%; left: 25%; animation-delay: 1s;"></div>
+                    <div class="flow-line" style="top: 80%; width: 70%; left: 15%; animation-delay: 1.5s;"></div>
                 </div>
-                <div class="metric-item">
-                    <div class="metric-num">4</div>
-                    <div class="metric-label">企业级系统</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-num">2.5周</div>
-                    <div class="metric-label">MVP最快交付</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-num">99%+</div>
-                    <div class="metric-label">数据准确率</div>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="projects">
-                <a href="./bupa/index.html" class="project-card">
-                    <div class="project-icon">💼</div>
-                    <div class="project-title">奔步 × BUPA</div>
-                    <div class="project-desc">企业级保险核心业务系统重构</div>
-                    <div class="project-proof">日处理200+Case · 99%+准确率</div>
-                    <span class="project-badge">企业交付</span>
-                </a>
-
-                <a href="./habit/index.html" class="project-card">
-                    <div class="project-icon">🎯</div>
-                    <div class="project-title">渐成画迹</div>
-                    <div class="project-desc">微习惯追踪App · 0到1独立产品</div>
-                    <div class="project-proof">满意度4.6/5 · 98.4%测试通过</div>
-                    <span class="project-badge">独立产品</span>
-                </a>
-
-                <a href="./painting/index.html" class="project-card">
-                    <div class="project-icon">🎨</div>
-                    <div class="project-title">字里藏画</div>
-                    <div class="project-desc">AI图像生成工具 · 3天MVP</div>
-                    <div class="project-proof">风格复刻 · API中台规划</div>
-                    <span class="project-badge">AI工具</span>
-                </a>
-
-                <a href="./embroidery/index.html" class="project-card">
-                    <div class="project-icon">🧵</div>
-                    <div class="project-title">AI刺绣定制</div>
-                    <div class="project-desc">4-Agent架构 · 非遗定制平台</div>
-                    <div class="project-proof">85%测试通过 · 0.04元/次</div>
-                    <span class="project-badge">架构设计</span>
-                </a>
-
-                <a href="./aimodel/index.html" class="project-card">
-                    <div class="project-icon">📊</div>
-                    <div class="project-title">AI模型日报</div>
-                    <div class="project-desc">五维评估 · 场景化选型</div>
-                    <div class="project-proof">覆盖40+模型 · 11场景</div>
-                    <span class="project-badge">数据产品</span>
-                </a>
-            </div>
-
-            <div class="footer">
-                作品集 · Portfolio
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Capability Matrix Section -->
+    <section class="capability-section">
+        <div class="section-header">
+            <h2>能力矩阵</h2>
+        </div>
+        <div class="capability-grid">
+            <div class="capability-card">
+                <span class="capability-icon">🏗️</span>
+                <h3 class="capability-title">结构化产品思维</h3>
+                <p class="capability-desc">四分文档体系（PRD/TDD/DBD/TestPlan）</p>
+                <div class="capability-proof">渐成画迹App从需求到上线全程文档驱动</div>
+            </div>           
+            <div class="capability-card">
+                <span class="capability-icon">⚡</span>
+                <h3 class="capability-title">高效验证与交付</h3>
+                <p class="capability-desc">Vibe Coding 2.5周MVP + Agent项目中3天止损决策</p>
+                <div class="capability-proof">渐成画迹App已部署，少部分真实用户测试</div>
+            </div>
+            <div class="capability-card">
+                <span class="capability-icon">🚀</span>
+                <h3 class="capability-title">项目落地与迭代</h3>
+                <p class="capability-desc">P0边界管控 + 版本冻结机制 + 数据复盘</p>
+                <p class="capability-desc">习惯App P0冻结后仅修Bug，明确P0/P1边界</p>
+                <p class="capability-desc">Agent1 V5定为Baseline，进入维护状态</p>
+                <div class="capability-proof">习惯App已部署Vercel，5位真实用户测试</div>
+            </div>
+            <div class="capability-card">
+                <span class="capability-icon">🤝</span>
+                <h3 class="capability-title">跨部门协同推进</h3>
+                <p class="capability-desc">需求对齐 + 英文文档交付 + 多方验收</p>
+                <p class="capability-desc">奔步BUPA项目：与英国业务方远程对接</p>
+                <p class="capability-desc">PPG项目：机场酒店系统跨部门流程梳理</p>
+                <div class="capability-proof">全英文PRD/交接文档，跨国团队协作经验</div>
+            </div>
+            <div class="capability-card">
+                <span class="capability-icon">🧪</span>
+                <h3 class="capability-title">模型选型与评测</h3>
+                <p class="capability-desc">Seedream 5.0 Lite（成本效率）vs Midjourney/SD</p>
+                <p class="capability-desc">6维度加权评分体系：语义/边界/冲突/澄清/社交/基础</p>
+                <div class="capability-proof">Token优化40%，单次请求成本0.04元</div>
+            </div>
+            <div class="capability-card">
+                <span class="capability-icon">🤖</span>
+                <h3 class="capability-title">Multi-Agent架构设计</h3>
+                <p class="capability-desc">Agent串联（需求解析→图案生成→匠人匹配→进度监控）</p>
+                <p class="capability-desc">职责边界划分 + JSON接口契约 + 3层降级策略</p>
+                <div class="capability-proof">AI刺绣定制平台MVP</div>
+            </div>
+            <div class="capability-card">
+                <span class="capability-icon">⚡</span>
+                <h3 class="capability-title">AI工作流编排</h3>
+                <p class="capability-desc">Coze工作流：分支判断→多轮澄清→图像生成→规则匹配</p>
+                <p class="capability-desc">3天止损决策：端到端复杂Agent→拆分成2个Agent架构</p>
+                <div class="capability-proof">避免沉没成本</div>
+            </div>
+            <div class="capability-card">
+                <span class="capability-icon">✍️</span>
+                <h3 class="capability-title">Prompt+RAG混合架构工程调优</h3>
+                <p class="capability-desc">V1→V5迭代，解决Token超限、显式状态块解决记忆丢失</p>
+                <p class="capability-desc">测试发现阻断级缺陷问题，使用冲突预检机制,从0分→5分修复</p>
+                <div class="capability-proof">Agent1需求解析85%通过率</div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="techstack-section">
+        <div class="techstack-bg-glow techstack-bg-glow-1"></div>
+        <div class="techstack-bg-glow techstack-bg-glow-2"></div>
+        <div class="section-header">
+            <h2>技术栈与工具链</h2>
+            <p>全链路技术选型与工程实践</p>
+        </div>
+        <div class="techstack-cloud">
+            <div class="techstack-row">
+                <span class="tech-category-label tech-category-frontend">前端：Vue3 | TypeScript | Tailwind CSS | Vite</span>
+            </div>
+
+            <div class="techstack-row">
+                <span class="tech-category-label tech-category-backend">后端：Supabase | PostgreSQL | Edge Functions</span>
+            </div>
+
+            <div class="techstack-row">
+                <span class="tech-category-label tech-category-data">数据层：Dexie.js | IndexedDB | 竞品分析 | 用户访谈</span>
+            </div>
+
+            <div class="techstack-row">
+                <span class="tech-category-label tech-category-design">设计层：Figma | Pencil | Axure | 文生图(AIGC)</span>
+            </div>
+
+            <div class="techstack-row">
+                <span class="tech-category-label tech-category-ai">AI工具：Coze | Trae | Kimi | 文心一言 | Seedream</span>
+            </div>
+
+            <div class="techstack-row">
+                <span class="tech-category-label tech-category-agent">Agent层：Coze(工作流编排) | Trae(AI编程) | 多Agent串联架构 | Prompt | RGA</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics-section">
+        <div class="section-header">
+            <h2>项目能力映射</h2>
+            <p>用数字说话，数据驱动的产品实践</p>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-number">2.5周</div>
+                <div class="metric-label">习惯App MVP交付周期</div>
+                <div class="metric-sublabel">需求→原型→开发→部署</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">85%</div>
+                <div class="metric-label">Agent1测试通过率</div>
+                <div class="metric-sublabel">V5修复后核心能力5/5</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">6个</div>
+                <div class="metric-label">独立主导项目</div>
+                <div class="metric-sublabel">习惯App/刺绣Agent/AI日报/字里藏画/毕设/美食汇</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">40%</div>
+                <div class="metric-label">Token优化</div>
+                <div class="metric-sublabel">刺绣平台单次请求成本0.04元</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Preview -->
+    <section class="projects-preview">
+        <div class="section-header">
+            <h2>精选项目</h2>
+        </div>
+        <div class="projects-grid">
+            <a href="projects.html#habit" class="project-card">
+                <div class="project-card-image">
+                    <span class="project-type-badge">C端应用. Vibe Coding</span>
+                    <span class="project-icon">🎯</span>
+                </div>
+                <div class="project-card-content">
+                    <h3 class="project-card-title">渐成画迹</h3>
+                    <p class="project-card-desc">微习惯追踪App，AI-Native独立产品，从0到1全流程闭环</p>
+                    <div class="project-card-stats">
+                        <span class="project-stat">满意度 4.6/5</span>
+                        <span class="project-stat">痛点解决率 100%</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="projects.html#embroidery" class="project-card">
+                <div class="project-card-image">
+                    <span class="project-type-badge">AI架构</span>
+                    <span class="project-icon">🧵</span>
+                </div>
+                <div class="project-card-content">
+                    <h3 class="project-card-title">AI刺绣定制平台</h3>
+                    <p class="project-card-desc">Multi_Agent-Flow串联，Prompt+RAG混合架构非遗定制智能化</p>
+                    <div class="project-card-stats">
+                        <span class="project-stat">85%通过率</span>
+                        <span class="project-stat">0.04元/次</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="projects.html#aidaily" class="project-card">
+                <div class="project-card-image">
+                    <span class="project-type-badge">AI工具</span>
+                    <span class="project-icon">📊</span>
+                </div>
+                <div class="project-card-content">
+                    <h3 class="project-card-title">AI模型日报</h3>
+                    <p class="project-card-desc">20+公司40+模型动态追踪，五维评估框架每日自动更新</p>
+                    <div class="project-card-stats">
+                        <span class="project-stat">6监控源聚合</span>
+                        <span class="project-stat">一键更新</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="projects.html" class="project-card project-card-more">
+                <span class="arrow">→</span>
+                <span style="font-size: 18px; font-weight: 600;">查看全部项目</span>
+                <span style="font-size: 14px; opacity: 0.6; margin-top: 8px;">6+ 完整项目案例</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 叶杏涛 · 作品集</p>
+    </footer>
+
+    <script>
+        // 数字滚动动画
+        const animateNumbers = () => {
+            const numbers = document.querySelectorAll('.metric-number');
+            numbers.forEach(num => {
+                const text = num.textContent;
+                const numeric = parseFloat(text);
+                if (!isNaN(numeric)) {
+                    let current = 0;
+                    const increment = numeric / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= numeric) {
+                            num.textContent = text;
+                            clearInterval(timer);
+                        } else {
+                            if (text.includes('%')) {
+                                num.textContent = current.toFixed(1) + '%';
+                            } else if (text.includes('周')) {
+                                num.textContent = current.toFixed(1) + '周';
+                            } else {
+                                num.textContent = Math.floor(current) + (text.includes('+') ? '+' : '');
+                            }
+                        }
+                    }, 30);
+                }
+            });
+        };
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('metrics-section')) {
+                        animateNumbers();
+                    }
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.metrics-section, .tags-section, .projects-preview').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
