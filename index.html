@@ -1179,41 +1179,10 @@
     </footer>
 
     <script>
-        // 数字滚动动画
-        const animateNumbers = () => {
-            const numbers = document.querySelectorAll('.metric-number');
-            numbers.forEach(num => {
-                const text = num.textContent;
-                const numeric = parseFloat(text);
-                if (!isNaN(numeric)) {
-                    let current = 0;
-                    const increment = numeric / 50;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= numeric) {
-                            num.textContent = text;
-                            clearInterval(timer);
-                        } else {
-                            if (text.includes('%')) {
-                                num.textContent = current.toFixed(1) + '%';
-                            } else if (text.includes('周')) {
-                                num.textContent = current.toFixed(1) + '周';
-                            } else {
-                                num.textContent = Math.floor(current) + (text.includes('+') ? '+' : '');
-                            }
-                        }
-                    }, 30);
-                }
-            });
-        };
-
         // Intersection Observer for animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    if (entry.target.classList.contains('metrics-section')) {
-                        animateNumbers();
-                    }
                     entry.target.classList.add('animate-in');
                 }
             });
