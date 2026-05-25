@@ -1,0 +1,23 @@
+# 大文件排除
+*.mp4
+*.mov
+*.avi
+*.wmv
+*.docx
+*.pdf
+*.pptx
+*.zip
+*.rar
+*.7z
+
+# 临时文件
+~$*
+*.tmp
+*.temp
+
+# 简历和文档
+resume_page_*.png
+pm岗位关键词.md
+个人网站风格规划.md
+叶杏涛-产品经理-中文版-*.md
+叶杏涛-产品经理_V2.pdf
